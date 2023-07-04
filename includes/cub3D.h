@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:43:27 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/04 15:05:05 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/04 18:04:41 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <errno.h>
+#include <limits.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
@@ -40,6 +41,8 @@
 # define PI 3.14159265359
 # define TWO_PI 6.28318530718
 
+#define MINIMAP_SCALE_FACTOR 0.5
+
 # define TILE_SIZE 64
 # define MAP_NUM_ROWS 13
 # define MAP_NUM_COLS 20
@@ -49,7 +52,7 @@
 
 # define FOV_ANGLE (60 * (PI / 180))
 
-# define WALL_STRIP_WIDTH 4
+# define WALL_STRIP_WIDTH 1
 # define NUM_RAYS (WINDOW_WIDTH / WALL_STRIP_WIDTH)
 
 typedef struct s_img {
@@ -76,23 +79,26 @@ typedef struct s_data {
 
 }	t_data;
 
-typedef struct s_cub {
-	t_data		*data;
-	t_player	*player;
-	t_img		*img;
-}	t_cub;
 
 typedef struct s_ray {
 	float	rayAngle;
 	float	wallhitX;
 	float	wallhitY;
 	float	distance;
+	int		wallHitContent;
 	int		wasHitVertical;
 	int		is_facing_up;
 	int		is_facing_down;
 	int		is_facing_left;
 	int		is_facing_right;
 }	t_ray;
+
+typedef struct s_cub {
+	t_data		*data;
+	t_player	*player;
+	t_img		*img;
+	t_ray		*ray[NUM_RAYS];
+}	t_cub;
 
 void	parsing(char *str);
 void	file_checker(char *str);
