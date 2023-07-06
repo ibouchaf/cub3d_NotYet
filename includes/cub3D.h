@@ -6,7 +6,7 @@
 /*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:43:27 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/05 10:39:24 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/05 17:53:43 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct s_img {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		width;
+	int		height;
 }	t_img;
 
 typedef struct s_player {
@@ -97,6 +99,7 @@ typedef struct s_cub {
 	t_data		*data;
 	t_player	*player;
 	t_img		*img;
+	t_img		*texture;
 	t_ray		*ray[NUM_RAYS];
 }	t_cub;
 

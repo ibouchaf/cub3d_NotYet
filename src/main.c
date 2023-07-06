@@ -6,7 +6,7 @@
 /*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:08:30 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/05 16:07:22 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/06 09:13:54 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,20 @@ int	mapHasWallAt(float x, float y)
 	return (map[map_grid_index_y][map_grid_index_x] != 0);
 }
 
-void my_mlx_pixel_put(t_cub *cub, int x, int y, int color)
+unsigned int get_pixel_from_image(t_img *img, int x, int y)
 {
 	char *dst;
 
-	dst = cub->img->addr + (y * (MAP_NUM_COLS * TILE_SIZE * 4) + x * 4);
+	dst = img->addr + (y * img->line_length + x
+			* (img->bits_per_pixel / 8));
+	return (*(unsigned int *)dst);
+}
+
+void my_mlx_pixel_put(t_img *img, int x, int y, int color)
+{
+	char *dst;
+
+	dst = img->addr + (y * (MAP_NUM_COLS * TILE_SIZE * 4) + x * 4);
 	*(unsigned int *)dst = color;
 }
 
@@ -72,7 +81,7 @@ void	my_pixel_put(t_cub *cub, int x, int y, int color)
 		j = 0;
 		while (j < TILE_SIZE)
 		{
-			my_mlx_pixel_put(cub, (x + i) * MINIMAP_SCALE, (y + j) * MINIMAP_SCALE, color);
+			my_mlx_pixel_put(cub->img, (x + i) * MINIMAP_SCALE, (y + j) * MINIMAP_SCALE, color);
 			j++;
 		}
 		i++;
@@ -104,35 +113,35 @@ void	render_map(t_cub *cub)
 	}
 }
 
-void	draw_line(t_cub *cub, int beginx, int beginy,
-					int endx, int endy, int color)
-{
-	int		pixels;
-	double	pixelx;
-	double	pixely;
-	double	deltax;
-	double	deltay;
+// void	draw_line(t_cub *cub, int beginx, int beginy,
+// 					int endx, int endy, int color)
+// {
+// 	int		pixels;
+// 	double	pixelx;
+// 	double	pixely;
+// 	double	deltax;
+// 	double	deltay;
 
-	deltax = endx - beginx;
-	deltay = endy - beginy;
-	pixels = sqrt((deltax * deltax) + (deltay * deltay));
-	deltax /= pixels;
-	deltay /= pixels;
-	pixelx = beginx;
-	pixely = beginy;
-	while (pixels)
-	{
-		my_mlx_pixel_put(cub, pixelx * MINIMAP_SCALE, pixely * MINIMAP_SCALE, color);
-		pixelx += deltax;
-		pixely += deltay;
-		--pixels;
-	}
-}
+// 	deltax = endx - beginx;
+// 	deltay = endy - beginy;
+// 	pixels = sqrt((deltax * deltax) + (deltay * deltay));
+// 	deltax /= pixels;
+// 	deltay /= pixels;
+// 	pixelx = beginx;
+// 	pixely = beginy;
+// 	while (pixels)
+// 	{
+// 		my_mlx_pixel_put(cub->img, pixelx * MINIMAP_SCALE, pixely * MINIMAP_SCALE, color);
+// 		pixelx += deltax;
+// 		pixely += deltay;
+// 		--pixels;
+// 	}
+// }
 
 void	render_player(t_cub *cub)
 {
 
-	my_mlx_pixel_put(cub, cub->player->x * MINIMAP_SCALE, cub->player->y * MINIMAP_SCALE, 0x00203FFF);
+	my_mlx_pixel_put(cub->img, cub->player->x * MINIMAP_SCALE, cub->player->y * MINIMAP_SCALE, 0x00203FFF);
 	// draw_line(cub, cub->player->x, cub->player->y,
 	// 	cub->player->x + cos(cub->player->angle) * 70,
 	// 	cub->player->y + sin(cub->player->angle) * 70, 0x00203FFF);
@@ -148,11 +157,12 @@ void	move_player(t_cub *cub)
 	move_step = cub->player->walkdir * cub->player->walkspeed;
 	new_px = cub->player->x + cos(cub->player->angle) * move_step;
 	new_py = cub->player->y + sin(cub->player->angle) * move_step;
-	if (!mapHasWallAt(new_px, new_py))
-	{
+
+	if (!mapHasWallAt(new_px, cub->player->y))
 		cub->player->x = new_px;
+	if (!mapHasWallAt(cub->player->x, new_py))
 		cub->player->y = new_py;
-	}
+
 }
 
 int	key_hook(int keycode, t_cub *cub)
@@ -333,12 +343,23 @@ void	cast_all_rays(t_cub *cub)
 	// }
 }
 
+
 void rect(t_cub *cub, int x, int y, int width, int height)
 {
 	int i;
 	int j;
+	int tex_x;
+	int tex_y;
+	float scale1;
+	float scale2;
 
 	i = 0;
+	scale1 = cub->texture->width / TILE_SIZE;
+	tex_x = cub->ray[x]->wallhitX;
+	if(cub->ray[x]->wasHitVertical)
+		tex_x = cub->ray[x]->wallhitY;
+	tex_x = fmod((tex_x * scale1), cub->texture->width);
+	scale2 = ((double)cub->texture->height / height);
 	while (i < width)
 	{
 		j = 0;
@@ -346,7 +367,8 @@ void rect(t_cub *cub, int x, int y, int width, int height)
 		{
 			if ((y + j) >= WINDOW_HEIGHT)
 				break;
-			my_mlx_pixel_put(cub, x + i, y + j, 0xFF00000);
+			tex_y = j * scale2;
+			my_mlx_pixel_put(cub->img, x + i, y + j, get_pixel_from_image(cub->texture, tex_x, tex_y));
 			j++;
 		}
 		i++;
@@ -381,7 +403,7 @@ void clear_sceen(t_cub *cub)
 		j = 0;
 		while (j < WINDOW_HEIGHT)
 		{
-			my_mlx_pixel_put(cub, i, j, 0);
+			my_mlx_pixel_put(cub->img, i, j, 0);
 			j++;
 		}
 		i++;
@@ -397,6 +419,16 @@ int	setup(t_cub *cub)
 	generate3DProjection(cub, cub->ray);
 	mlx_put_image_to_window(cub->data->mlx, cub->data->win, cub->img->img, 0, 0);
 	return 0;
+}
+
+void init_texture(t_cub *cub)
+{
+	cub->texture = malloc(sizeof(t_img));
+	cub->texture->img = mlx_xpm_file_to_image(cub->data->mlx, "./pikuma.xpm", &cub->texture->width, &cub->texture->height);
+	if (!cub->texture->img)
+		exit(0);
+	cub->texture->addr = mlx_get_data_addr(cub->texture->img, &cub->texture->bits_per_pixel,
+			&cub->texture->line_length, &cub->texture->endian);
 }
 
 void	initialize(t_cub *cub)
@@ -422,8 +454,8 @@ void	initialize(t_cub *cub)
 	, WINDOW_HEIGHT);
 	cub->img->addr = mlx_get_data_addr(cub->img->img, &cub->img->bits_per_pixel,
 			&cub->img->line_length, &cub->img->endian);
+	init_texture(cub);
 }
-
 
 int main(int ac, char **av)
 {
