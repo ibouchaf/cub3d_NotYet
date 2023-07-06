@@ -6,7 +6,7 @@
 /*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:08:30 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/06 09:13:54 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/06 16:59:09 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ int	mapHasWallAt(float x, float y)
 {
 	int	map_grid_index_x;
 	int	map_grid_index_y;
+	if (x < 0 || y < 0 || y >= WINDOW_HEIGHT
+		|| x >= WINDOW_WIDTH )
+		return (1);
 	map_grid_index_x = floor(x / TILE_SIZE);
 	map_grid_index_y = floor(y / TILE_SIZE);
 	return (map[map_grid_index_y][map_grid_index_x] != 0);
@@ -57,7 +60,9 @@ unsigned int get_pixel_from_image(t_img *img, int x, int y)
 void my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char *dst;
-
+	if (x < 0 || y < 0 || y >= WINDOW_HEIGHT
+		|| x >= WINDOW_WIDTH)
+		return ;
 	dst = img->addr + (y * (MAP_NUM_COLS * TILE_SIZE * 4) + x * 4);
 	*(unsigned int *)dst = color;
 }
@@ -385,7 +390,7 @@ void generate3DProjection(t_cub *cub, t_ray **rays)
 		int wallStripHeight = (int)projectedWallHeight;
 
 		int wallTopPixel = (WINDOW_HEIGHT / 2) - (wallStripHeight / 2);
-		wallTopPixel = wallTopPixel < 0 ? 0 : wallTopPixel;
+		// wallTopPixel = wallTopPixel < 0 ? 0 : wallTopPixel;
 
 		rect(cub, i * WALL_STRIP_WIDTH, wallTopPixel, 1, wallStripHeight);
 	}
