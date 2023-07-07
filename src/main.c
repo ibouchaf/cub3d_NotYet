@@ -6,7 +6,7 @@
 /*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:08:30 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/06 16:59:09 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/06 22:28:24 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ int	key_hook(int keycode, t_cub *cub)
 		cub->player->turndir = 1;
 	else if (keycode == A_KEY || keycode == LEFT_KEY)
 		cub->player->turndir = -1;
-	move_player(cub);
+	// move_player(cub);
 	return (0);
 }
 
@@ -334,18 +334,13 @@ void	cast_all_rays(t_cub *cub)
 {
 	float rayAngle = cub->player->angle - (FOV_ANGLE/ 2);
 	int	stripid = 0;
-	// t_ray	*rays[NUM_RAYS] = init_rays(t_ray *rays[NUM_RAYS]);
+
 	while (stripid < NUM_RAYS)
 	{
-		// draw_line(cub, cub->player->x, cub->player->y, cub->player->x + cos(rayAngle) * 70, cub->player->y + sin(rayAngle) * 70, 0xFF00000);
 		cast_ray(rayAngle, stripid, cub->ray, cub);
 		rayAngle += FOV_ANGLE / NUM_RAYS;
 		stripid++;
 	}
-	// for (int i = 0; i < NUM_RAYS; i++) {
-	// 	draw_line(cub, cub->player->x,cub->player->y, cub->ray[i]->wallhitX,
-	// 	cub->ray[i]->wallhitY, 0xFF00000);
-	// }
 }
 
 
@@ -420,6 +415,7 @@ int	setup(t_cub *cub)
 	clear_sceen(cub);
 	// render_map(cub);
 	// render_player(cub);
+	move_player(cub);
 	cast_all_rays(cub);
 	generate3DProjection(cub, cub->ray);
 	mlx_put_image_to_window(cub->data->mlx, cub->data->win, cub->img->img, 0, 0);
