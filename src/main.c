@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:08:30 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/08 12:30:49 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/08 15:19:49 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,9 +109,9 @@ void	render_map(t_cub *cub)
 			tilex = i * TILE_SIZE;
 			tiley = j * TILE_SIZE;
 			if (cub->mx->map2[j][i] == '1')
-				my_pixel_put(cub, tilex, tiley, 0xDFCD8B);
-			else
-				my_pixel_put(cub, tilex, tiley, 0xB1B3B2);
+				my_pixel_put(cub, tilex, tiley, 0xFF0000);
+			else if (cub->mx->map2[j][i] == '0')
+				my_pixel_put(cub, tilex, tiley, 0x00FFFF);
 			i++;
 		}
 		j++;
@@ -344,6 +344,7 @@ void	cast_all_rays(t_cub *cub)
 		stripid++;
 	}
 	for (int i = 0; i < NUM_RAYS; i++) {
+
 		draw_line(cub, cub->player->x,cub->player->y, cub->ray[i]->wallhitX,
 		cub->ray[i]->wallhitY, 0xFF00000);
 	}

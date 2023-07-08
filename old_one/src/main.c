@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:08:30 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/08 09:40:14 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/08 14:18:17 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -340,6 +340,7 @@ void	cast_all_rays(t_cub *cub)
 		cast_ray(rayAngle, stripid, cub->ray, cub);
 		rayAngle += FOV_ANGLE / NUM_RAYS;
 		stripid++;
+		printf("%d\n", stripid);
 	}
 }
 

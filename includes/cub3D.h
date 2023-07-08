@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:43:27 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/08 11:56:17 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/08 13:59:28 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 # define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
 
 # define FOV_ANGLE (60 * (PI / 180))
-# define MINIMAP_SCALE 1
+# define MINIMAP_SCALE 0.5
 # define WALL_STRIP_WIDTH 1
 # define NUM_RAYS (WINDOW_WIDTH / WALL_STRIP_WIDTH)
 
