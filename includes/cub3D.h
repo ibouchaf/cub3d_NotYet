@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:43:27 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/05 17:53:43 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/08 11:56:17 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 # define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
 
 # define FOV_ANGLE (60 * (PI / 180))
-# define MINIMAP_SCALE 0.2
+# define MINIMAP_SCALE 1
 # define WALL_STRIP_WIDTH 1
 # define NUM_RAYS (WINDOW_WIDTH / WALL_STRIP_WIDTH)
 
@@ -95,12 +95,30 @@ typedef struct s_ray {
 	int		is_facing_right;
 }	t_ray;
 
+typedef struct s_mx {
+	char	**map;
+	char	**map2;
+	int		height;
+	int		width;
+	int		count;
+	int		print;
+	char 	*a;
+	char 	*b;
+	char 	*c;
+	char 	*d;
+	char 	*e;
+	char 	*f;
+	int	i;
+	int	j;
+}				t_mx;
+
 typedef struct s_cub {
 	t_data		*data;
 	t_player	*player;
 	t_img		*img;
 	t_img		*texture;
 	t_ray		*ray[NUM_RAYS];
+	t_mx		*mx;
 }	t_cub;
 
 void	parsing(char *str);
@@ -113,5 +131,6 @@ void	exit_strerr(char *str, int err);
 
 void	render_map(t_cub *cub);
 void	render_player(t_cub *cub);
+void	parsing_map(t_mx *mlx, char *av);
 
 #endif

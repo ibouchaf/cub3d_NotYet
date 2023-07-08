@@ -40,7 +40,7 @@
 // 	// char	**map2;
 // }				t_data;
 
-// void	count_height(t_mlx **mlx, int fd)
+// void	count_height(t_mx **mlx, int fd)
 // {
 // 	char *str = NULL;
 
@@ -91,7 +91,7 @@
 // 		i++;
 // 	return i;
 // }
-// void	check_walls(t_mlx	*mlx)
+// void	check_walls(t_mx	*mlx)
 // {
 // 	int i = 0;
 // 	int j = 0;
@@ -182,7 +182,7 @@
 // 	return (NULL);
 // }
 
-// void	parsing_map(t_mlx *mlx, char *av)
+// void	parsing_map(t_mx *mlx, char *av)
 // {
 // 	int	fd;
 // 	int i = 0;
@@ -326,8 +326,8 @@
 
 // int main(int ac, char **av)
 // {
-// 	t_mlx	*mlx;
-// 	mlx = malloc(sizeof(t_mlx));
+// 	t_mx	*mlx;
+// 	mlx = malloc(sizeof(t_mx));
 // 	mlx->height = 0;
 // 	mlx->width = 0;
 // 	mlx->count = 0;
@@ -337,9 +337,9 @@
 // 	// initialization(*mlx);
 // }
 /////////////////////////////////////////
-#include "cub3d.h"
+#include "cub3D.h"
 
-void	count_height(t_mlx **mlx, int fd)
+void	count_height(t_mx **mlx, int fd)
 {
 	char *str = NULL;
 
@@ -404,7 +404,7 @@ int ft_strlen2(char **s)
 	return i;
 }
 
-int	height_map2(t_mlx *mlx)
+int	height_map2(t_mx *mlx)
 {
 	int i = 0;
 	int j = 0;
@@ -423,7 +423,7 @@ int	height_map2(t_mlx *mlx)
 		}
 	return (j);
 }
-void	init(t_mlx *mlx)
+void	init(t_mx *mlx)
 {
 	mlx->map2 = NULL;
 	mlx->a = NULL;
@@ -438,7 +438,7 @@ void	init(t_mlx *mlx)
 	mlx->map = NULL;
 }
 
-void	is_surrounded_by_walls(t_mlx	*mlx)
+void	is_surrounded_by_walls(t_mx	*mlx)
 {
 	mlx->i = 0;
 	mlx->j = 0;
@@ -466,21 +466,38 @@ void	is_surrounded_by_walls(t_mlx	*mlx)
 	}
 }
 
-void	complete_map(t_mlx *mlx)
+void	complete_map(t_mx *mlx)
 {
 	int y = 0;
 	int z;
 	int p = 0;
+	int found_empty_line = 0;
+	char *tmp;
 	while(mlx->height > mlx->j)
-		mlx->map2[mlx->i++] = mlx->map[mlx->j++];
+	{
+		// leaks trim
+		tmp = ft_strtrim(mlx->map[mlx->j], " ");
+		if(ft_strcmp(tmp, "\n") && ft_strcmp(tmp, ""))
+		{
+			if (found_empty_line)
+				exit(69);
+			mlx->map2[mlx->i++] = mlx->map[mlx->j];
+		}
+		else
+			found_empty_line = 1;
+		mlx->j++;
+		free(tmp);
+	}
+	mlx->map2[mlx->i] = NULL;
 	while (mlx->map2[y])
 	{
 		z = 0;
+		printf("%s", mlx->map2[y]);
 		while (mlx->map2[y][z])
 		{
-			if (mlx->map2[y][z] != 0 ||mlx->map2[y][z] != ' ' || mlx->map2[y][z] != '\n'|| mlx->map2[y][z] != '\0'||  mlx->map2[y][z] != 1 || mlx->map2[y][z] != 'N' || mlx->map2[y][z] != 'S' ||mlx->map2[y][z] != 'E' || mlx->map2[y][z] != 'W')
+			if (mlx->map2[y][z] != '0'  && mlx->map2[y][z] != 32  && mlx->map2[y][z] != '\n' && mlx->map2[y][z] != '1'  && mlx->map2[y][z] != 'N'  && mlx->map2[y][z] != 'S'  &&mlx->map2[y][z] != 'E'  && mlx->map2[y][z] != 'W')
 				ft_putstr("kayna chi haja mn ghir player\n");
-			if (mlx->map2[y][z] != 'N' || mlx->map2[y][z] != 'S' ||mlx->map2[y][z] != 'E' || mlx->map2[y][z] != 'W')
+			if (mlx->map2[y][z] == 'N' ||  mlx->map2[y][z] == 'S' || mlx->map2[y][z] == 'E' || mlx->map2[y][z] == 'W')
 				p++;
 			z++;
 		}
@@ -488,15 +505,16 @@ void	complete_map(t_mlx *mlx)
 	}
 	if (p != 1)
 		ft_putstr("Errors in player\n");
-	mlx->map2[mlx->i] = NULL;
 	mlx->height = mlx->i - 1;// cuz i contain null.
 	mlx->i = 1;
 }
 
-void	check_walls(t_mlx	*mlx)
+void	check_walls(t_mx *mlx)
 {
 	mlx->j = height_map2(mlx);
 	mlx->map2 = malloc(sizeof(char *) * (mlx->height - mlx->j + 1));
+	for(int i = 0; i < mlx->height - mlx->j + 1; i++)
+		mlx->map2[i] = NULL;
 	mlx->i = 0;
 	complete_map(mlx);
 	is_surrounded_by_walls(mlx);
@@ -506,7 +524,7 @@ void	check_walls(t_mlx	*mlx)
 		mlx->j = 0;
 		while(mlx->map2[mlx->i][mlx->j])
 		{
-			if (mlx->map2[mlx->i][mlx->j] == '0')
+			if (mlx->map2[mlx->i][mlx->j] == '0' || mlx->map2[mlx->i][mlx->j] == 'N')
 			{
 				if (mlx->j > (int)ft_strlen(mlx->map2[mlx->i + 1])
 					|| mlx->j > (int)ft_strlen(mlx->map2[mlx->i - 1]) || mlx->j == 0)
@@ -521,20 +539,6 @@ void	check_walls(t_mlx	*mlx)
 		}
 		mlx->i++;
 	}
-}
-
-char	*ft_strrchr(char *s, int c)
-{
-	int	len;
-
-	len = ft_strlen(s);
-	while (len >= 0)
-	{
-		if (s[len] == (char)c)
-			return ((char *)(s + len));
-		len--;
-	}
-	return (NULL);
 }
 
 int	is_number(char **str)
@@ -566,7 +570,7 @@ int	is_range(char **str)
 	return(0);
 }
 
-int check_identifier(t_mlx *mlx, int i)
+int check_identifier(t_mx *mlx, int i)
 {
 	int j = 0;
 
@@ -603,7 +607,7 @@ int check_identifier(t_mlx *mlx, int i)
 	return 0;
 }
 
-int check_colors(t_mlx *mlx)
+int check_colors(t_mx *mlx)
 {
 	char** test1 = NULL;
 	char** test2 = NULL;
@@ -642,7 +646,7 @@ int check_identifier_format(char **identifier)
 	return 1;
 }
 
-int check_identifier_extension(t_mlx *mlx)
+int check_identifier_extension(t_mx *mlx)
 {
 	if (ft_strncmp(ft_strrchr(mlx->a, '.'), ".xpm\n", 5) != 0 ||
 		ft_strncmp(ft_strrchr(mlx->b, '.'), ".xpm\n", 5) != 0 ||
@@ -654,7 +658,7 @@ int check_identifier_extension(t_mlx *mlx)
 	return 1;
 }
 
-void	parsing_map(t_mlx *mlx, char *av)
+void parsing_map(t_mx *mlx, char *av)
 {
 	int	fd;
 	int i = 0;
@@ -670,6 +674,7 @@ void	parsing_map(t_mlx *mlx, char *av)
 	fd = open(av, O_RDONLY);
 	while (mlx->height > i)
 		mlx->map[i++] = get_next_line(fd);
+	mlx->map[i] = NULL;
 	i = 0;
 	while(mlx->height > i)
 	{
@@ -701,15 +706,4 @@ void	parsing_map(t_mlx *mlx, char *av)
 	if (!check_identifier_extension(mlx))
 		ft_putstr("Identifiers do not end with .xpm\n");
 	check_walls(mlx);
-}
-
-
-int main(int ac, char **av)
-{
-	t_mlx	*mlx;
-	mlx = malloc(sizeof(t_mlx));
-	(void)ac;
-	// check_extension(ac,av[1]);
-	parsing_map(mlx, av[1]);
-	// initialization(*mlx);
 }
