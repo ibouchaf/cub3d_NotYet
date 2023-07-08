@@ -6,27 +6,27 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:08:30 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/08 12:30:49 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/08 09:40:14 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-// const int	map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
-// {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-// {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-// {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-// {1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
-// {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-// {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
-// {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
-// {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
-// {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1},
-// {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-// {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-// {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-// {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-// };
+const int	map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
+{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+{1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
+{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
+{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1},
+{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+{1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
+};
 
 int	distroy_event(int keycode, t_cub *cub)
 {
@@ -36,7 +36,7 @@ int	distroy_event(int keycode, t_cub *cub)
 	return (0);
 }
 
-int	mapHasWallAt(float x, float y, t_mx *mlx)
+int	mapHasWallAt(float x, float y)
 {
 	int	map_grid_index_x;
 	int	map_grid_index_y;
@@ -45,7 +45,7 @@ int	mapHasWallAt(float x, float y, t_mx *mlx)
 		return (1);
 	map_grid_index_x = floor(x / TILE_SIZE);
 	map_grid_index_y = floor(y / TILE_SIZE);
-	return (mlx->map2[map_grid_index_y][map_grid_index_x] != 0);
+	return (map[map_grid_index_y][map_grid_index_x] != 0);
 }
 
 unsigned int get_pixel_from_image(t_img *img, int x, int y)
@@ -108,7 +108,7 @@ void	render_map(t_cub *cub)
 		{
 			tilex = i * TILE_SIZE;
 			tiley = j * TILE_SIZE;
-			if (cub->mx->map2[j][i] == '1')
+			if (map[j][i] == 1)
 				my_pixel_put(cub, tilex, tiley, 0xDFCD8B);
 			else
 				my_pixel_put(cub, tilex, tiley, 0xB1B3B2);
@@ -118,39 +118,38 @@ void	render_map(t_cub *cub)
 	}
 }
 
-void	draw_line(t_cub *cub, int beginx, int beginy,
-					int endx, int endy, int color)
-{
-	int		pixels;
-	double	pixelx;
-	double	pixely;
-	double	deltax;
-	double	deltay;
+// void	draw_line(t_cub *cub, int beginx, int beginy,
+// 					int endx, int endy, int color)
+// {
+// 	int		pixels;
+// 	double	pixelx;
+// 	double	pixely;
+// 	double	deltax;
+// 	double	deltay;
 
-	deltax = endx - beginx;
-	deltay = endy - beginy;
-	pixels = sqrt((deltax * deltax) + (deltay * deltay));
-	deltax /= pixels;
-	deltay /= pixels;
-	pixelx = beginx;
-	pixely = beginy;
-	while (pixels)
-	{
-		my_mlx_pixel_put(cub->img, pixelx * MINIMAP_SCALE, pixely * MINIMAP_SCALE, color);
-		pixelx += deltax;
-		pixely += deltay;
-		--pixels;
-	}
-
-}
+// 	deltax = endx - beginx;
+// 	deltay = endy - beginy;
+// 	pixels = sqrt((deltax * deltax) + (deltay * deltay));
+// 	deltax /= pixels;
+// 	deltay /= pixels;
+// 	pixelx = beginx;
+// 	pixely = beginy;
+// 	while (pixels)
+// 	{
+// 		my_mlx_pixel_put(cub->img, pixelx * MINIMAP_SCALE, pixely * MINIMAP_SCALE, color);
+// 		pixelx += deltax;
+// 		pixely += deltay;
+// 		--pixels;
+// 	}
+// }
 
 void	render_player(t_cub *cub)
 {
 
 	my_mlx_pixel_put(cub->img, cub->player->x * MINIMAP_SCALE, cub->player->y * MINIMAP_SCALE, 0x00203FFF);
-	draw_line(cub, cub->player->x, cub->player->y,
-		cub->player->x + cos(cub->player->angle) * 70,
-		cub->player->y + sin(cub->player->angle) * 70, 0x00203FFF);
+	// draw_line(cub, cub->player->x, cub->player->y,
+	// 	cub->player->x + cos(cub->player->angle) * 70,
+	// 	cub->player->y + sin(cub->player->angle) * 70, 0x00203FFF);
 }
 
 void	move_player(t_cub *cub)
@@ -164,12 +163,11 @@ void	move_player(t_cub *cub)
 	new_px = cub->player->x + cos(cub->player->angle) * move_step;
 	new_py = cub->player->y + sin(cub->player->angle) * move_step;
 
-	if (!mapHasWallAt(new_px, new_py, cub->mx))
-	{
+	if (!mapHasWallAt(new_px, cub->player->y))
 		cub->player->x = new_px;
+	if (!mapHasWallAt(cub->player->x, new_py))
 		cub->player->y = new_py;
-		printf("%c\n",cub->mx->map2[(int)cub->player->x][(int)cub->player->y]);
-	}
+
 }
 
 int	key_hook(int keycode, t_cub *cub)
@@ -246,11 +244,11 @@ void cast_ray(float rayAngle, int stripId, t_ray **rays, t_cub *cub) {
 		float xToCheck = nextHorzTouchX;
 		float yToCheck = nextHorzTouchY + (isRayFacingUp ? -1 : 0);
 
-		if (!mapHasWallAt(xToCheck, yToCheck, cub->mx)) {
+		if (mapHasWallAt(xToCheck, yToCheck)) {
 			// found a wall hit
 			horzWallHitX = nextHorzTouchX;
 			horzWallHitY = nextHorzTouchY;
-			horzWallContent = cub->mx->map2[(int)floor(yToCheck / TILE_SIZE)][(int)floor(xToCheck / TILE_SIZE)];
+			horzWallContent = map[(int)floor(yToCheck / TILE_SIZE)][(int)floor(xToCheck / TILE_SIZE)];
 			foundHorzWallHit = TRUE;
 			break;
 		} else {
@@ -290,11 +288,11 @@ void cast_ray(float rayAngle, int stripId, t_ray **rays, t_cub *cub) {
 		float xToCheck = nextVertTouchX + (isRayFacingLeft ? -1 : 0);
 		float yToCheck = nextVertTouchY;
 
-		if (!mapHasWallAt(xToCheck, yToCheck, cub->mx)) {
+		if (mapHasWallAt(xToCheck, yToCheck)) {
 			// found a wall hit
 			vertWallHitX = nextVertTouchX;
 			vertWallHitY = nextVertTouchY;
-			vertWallContent = cub->mx->map2[(int)floor(yToCheck / TILE_SIZE)][(int)floor(xToCheck / TILE_SIZE)];
+			vertWallContent = map[(int)floor(yToCheck / TILE_SIZE)][(int)floor(xToCheck / TILE_SIZE)];
 			foundVertWallHit = TRUE;
 			break;
 		} else {
@@ -342,10 +340,6 @@ void	cast_all_rays(t_cub *cub)
 		cast_ray(rayAngle, stripid, cub->ray, cub);
 		rayAngle += FOV_ANGLE / NUM_RAYS;
 		stripid++;
-	}
-	for (int i = 0; i < NUM_RAYS; i++) {
-		draw_line(cub, cub->player->x,cub->player->y, cub->ray[i]->wallhitX,
-		cub->ray[i]->wallhitY, 0xFF00000);
 	}
 }
 
@@ -438,11 +432,11 @@ void clear_sceen(t_cub *cub)
 int	setup(t_cub *cub)
 {
 	clear_sceen(cub);
-	// generate3DProjection(cub, cub->ray);
-	render_map(cub);
-	render_player(cub);
+	// render_map(cub);
+	// render_player(cub);
 	move_player(cub);
 	cast_all_rays(cub);
+	generate3DProjection(cub, cub->ray);
 	mlx_put_image_to_window(cub->data->mlx, cub->data->win, cub->img->img, 0, 0);
 	return 0;
 }
@@ -453,7 +447,6 @@ void	initialize(t_cub *cub)
 	int i = -1;
 	cub->data = malloc(sizeof(t_data));
 	cub->player = malloc(sizeof(t_player));
-	cub->mx = malloc(sizeof(t_mx));
 	while (i < NUM_RAYS)
 		cub->ray[i++] = malloc(sizeof(t_ray));
 	if (!cub->data || !cub->player)
@@ -482,8 +475,8 @@ int main(int ac, char **av)
 	if (ac != 2)
 		exit_success("Usage: ./cub3D <map.cub>");
 	cub = (t_cub *)malloc(sizeof(t_cub));
+    parsing(av[1]);
     initialize(cub);
-    parsing_map(cub->mx, av[1]);
 	cub->player->x = WINDOW_WIDTH / 2;
 	cub->player->y = WINDOW_HEIGHT / 2;
 	cub->player->angle = PI / 2;
