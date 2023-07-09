@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:43:27 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/08 18:52:07 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/09 08:19:17 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@
 # define FOV_ANGLE (60 * (PI / 180))
 # define MINIMAP_SCALE 0.25
 # define WALL_STRIP_WIDTH 1
-# define NUM_RAYS (WINDOW_WIDTH / WALL_STRIP_WIDTH)
+# define NUM_RAYS WINDOW_WIDTH
 
 typedef struct s_img {
 	void	*img;
@@ -102,12 +102,12 @@ typedef struct s_mx {
 	int		width;
 	int		count;
 	int		print;
-	char 	*a;
-	char 	*b;
-	char 	*c;
-	char 	*d;
+	char 	*NO;
+	char 	*SO;
+	char 	*WE;
+	char 	*EA;
 	int		h;
-	char 	*e;
+	char 	*F;
 	char 	*f;
 	int	i;
 	int	j;

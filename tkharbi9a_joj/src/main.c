@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:08:30 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/08 19:07:55 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/09 08:14:54 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-// const int	map[MAP_NUM_ROWS][MAP_NUM_COLS] = {
-// {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
-// {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-// {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-// {1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1},
-// {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-// {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
-// {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
-// {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1},
-// {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1},
-// {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-// {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-// {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-// {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
-// };
 
 int	distroy_event(int keycode, t_cub *cub)
 {
@@ -40,12 +24,14 @@ int	mapHasWallAt(float x, float y, t_cub *cub)
 {
 	int	map_grid_index_x;
 	int	map_grid_index_y;
-	if (x < 0 || y < 0 || y >= cub->mx->height * TILE_SIZE
-		|| x >= ft_strlen(cub->mx->map2[0]) * TILE_SIZE )
+	if (x < 0 || y < 0 || y >= (cub->mx->h * TILE_SIZE))
 		return (1);
 	map_grid_index_x = floor(x / TILE_SIZE);
 	map_grid_index_y = floor(y / TILE_SIZE);
-	return (cub->mx->map2[map_grid_index_y][map_grid_index_x] != '0');
+	if (map_grid_index_x >= ft_strlen(cub->mx->map2[map_grid_index_y]))
+		return 1;
+	// printf("%c\n",cub->mx->map2[map_grid_index_y][map_grid_index_x]);
+	return (cub->mx->map2[map_grid_index_y][map_grid_index_x] == '1');
 }
 
 unsigned int get_pixel_from_image(t_img *img, int x, int y)
@@ -63,7 +49,8 @@ void my_mlx_pixel_put(t_img *img, int x, int y, int color)
 	if (x < 0 || y < 0 || y >= WINDOW_HEIGHT
 		|| x >= WINDOW_WIDTH)
 		return ;
-	dst = img->addr + (y * (MAP_NUM_COLS * TILE_SIZE * 4) + x * 4);
+	dst = img->addr + (y * img->line_length + x
+		* (img->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 
@@ -243,7 +230,7 @@ void cast_ray(float rayAngle, int stripId, t_ray **rays, t_cub *cub) {
 	float nextHorzTouchY = yintercept;
 
 	// Increment xstep and ystep until we find a wall
-	while (nextHorzTouchX >= 0 && nextHorzTouchX <= (ft_strlen(cub->mx->map2[0]) * TILE_SIZE) && nextHorzTouchY >= 0 && nextHorzTouchY <= cub->mx->h * TILE_SIZE) {
+	while (nextHorzTouchX >= 0 && nextHorzTouchX <= (34 * TILE_SIZE) && nextHorzTouchY >= 0 && nextHorzTouchY <= (cub->mx->h * TILE_SIZE)) {
 		float xToCheck = nextHorzTouchX;
 		float yToCheck = nextHorzTouchY + (isRayFacingUp ? -1 : 0);
 
@@ -251,7 +238,7 @@ void cast_ray(float rayAngle, int stripId, t_ray **rays, t_cub *cub) {
 			// found a wall hit
 			horzWallHitX = nextHorzTouchX;
 			horzWallHitY = nextHorzTouchY;
-			horzWallContent = cub->mx->map2[(int)floor(yToCheck / TILE_SIZE)][(int)floor(xToCheck / TILE_SIZE)];
+			// horzWallContent = cub->mx->map2[(int)floor(yToCheck / TILE_SIZE)][(int)floor(xToCheck / TILE_SIZE)];
 			foundHorzWallHit = TRUE;
 			break;
 		} else {
@@ -259,7 +246,6 @@ void cast_ray(float rayAngle, int stripId, t_ray **rays, t_cub *cub) {
 			nextHorzTouchY += ystep;
 		}
 	}
-
 	///////////////////////////////////////////
 	// VERTICAL RAY-GRID INTERSECTION CODE
 	///////////////////////////////////////////
@@ -286,8 +272,8 @@ void cast_ray(float rayAngle, int stripId, t_ray **rays, t_cub *cub) {
 	float nextVertTouchX = xintercept;
 	float nextVertTouchY = yintercept;
 
-	// Increment xstep and ystep until we find a wall
-	while (nextVertTouchX >= 0 && nextVertTouchX <= (ft_strlen(cub->mx->map2[0]) * TILE_SIZE) && nextVertTouchY >= 0 && nextVertTouchY <= cub->mx->h * TILE_SIZE) {
+	// // Increment xstep and ystep until we find a wall
+	while (nextVertTouchX >= 0 && nextVertTouchX <= (34 * TILE_SIZE) && nextVertTouchY >= 0 && nextVertTouchY <= (cub->mx->h * TILE_SIZE)) {
 		float xToCheck = nextVertTouchX + (isRayFacingLeft ? -1 : 0);
 		float yToCheck = nextVertTouchY;
 
@@ -295,7 +281,7 @@ void cast_ray(float rayAngle, int stripId, t_ray **rays, t_cub *cub) {
 			// found a wall hit
 			vertWallHitX = nextVertTouchX;
 			vertWallHitY = nextVertTouchY;
-			vertWallContent = cub->mx->map2[(int)floor(yToCheck / TILE_SIZE)][(int)floor(xToCheck / TILE_SIZE)];
+			// vertWallContent = cub->mx->map2[(int)floor(yToCheck / TILE_SIZE)][(int)floor(xToCheck / TILE_SIZE)];
 			foundVertWallHit = TRUE;
 			break;
 		} else {
@@ -304,7 +290,7 @@ void cast_ray(float rayAngle, int stripId, t_ray **rays, t_cub *cub) {
 		}
 	}
 
-	// Calculate both horizontal and vertical hit distances and choose the smallest one
+	// // Calculate both horizontal and vertical hit distances and choose the smallest one
 	float horzHitDistance = foundHorzWallHit
 		? distanceBetweenPoints(cub->player->x, cub->player->y, horzWallHitX, horzWallHitY)
 		: INT_MAX;
@@ -336,16 +322,11 @@ void	cast_all_rays(t_cub *cub)
 {
 	float rayAngle = cub->player->angle - (FOV_ANGLE/ 2);
 	int	stripid = 0;
-
 	while (stripid < NUM_RAYS)
 	{
 		cast_ray(rayAngle, stripid, cub->ray, cub);
 		rayAngle += FOV_ANGLE / NUM_RAYS;
 		stripid++;
-	}
-		for (int i = 0; i < NUM_RAYS; i++) {
-		draw_line(cub, cub->player->x,cub->player->y, cub->ray[i]->wallhitX,
-		cub->ray[i]->wallhitY, 0xFF00000);
 	}
 }
 
@@ -392,7 +373,6 @@ void rect(t_cub *cub, int x, int y, int width, int height)
 			if ((y + j) >= WINDOW_HEIGHT)
 				break;
 			tex_y = j * scale2;
-			// printf("%c\n", map[i][j]);
 			my_mlx_pixel_put(cub->img, x + i, y + j, get_pixel_from_image(cub->texture, tex_x, tex_y));
 			j++;
 		}
@@ -410,8 +390,6 @@ void generate3DProjection(t_cub *cub, t_ray **rays)
 		int wallStripHeight = (int)projectedWallHeight;
 
 		int wallTopPixel = (WINDOW_HEIGHT / 2) - (wallStripHeight / 2);
-		// wallTopPixel = wallTopPixel < 0 ? 0 : wallTopPixel;
-		// init_texture(cub, i);
 		rect(cub, i * WALL_STRIP_WIDTH, wallTopPixel, 1, wallStripHeight);
 	}
 
@@ -439,11 +417,10 @@ int	setup(t_cub *cub)
 {
 	clear_sceen(cub);
 	move_player(cub);
+	// render_map(cub);
+	// render_player(cub);
 	cast_all_rays(cub);
 	generate3DProjection(cub, cub->ray);
-	render_map(cub);
-	render_player(cub);
-	cast_all_rays(cub);
 	mlx_put_image_to_window(cub->data->mlx, cub->data->win, cub->img->img, 0, 0);
 	return 0;
 }
@@ -485,13 +462,14 @@ int main(int ac, char **av)
 	cub->mx = malloc(sizeof(t_mx));
 	parsing_map(cub->mx, av[1]);
     initialize(cub);
-	cub->player->x = cub->mx->x  * TILE_SIZE;
-	cub->player->y = cub->mx->y * TILE_SIZE;
+
+	cub->player->x = (cub->mx->y * TILE_SIZE) + 32;
+	cub->player->y = (cub->mx->x * TILE_SIZE) + 32;
 	cub->player->angle = PI / 2;
 	cub->player->turndir = 0;
 	cub->player->walkdir = 0;
-	cub->player->turnspeed = 2 * (PI / 180);
-	cub->player->walkspeed = 20;
+	cub->player->turnspeed = 10 * (PI / 180);
+	cub->player->walkspeed = 10;
 	mlx_hook(cub->data->win, 2, 0, key_hook, cub);
 	mlx_hook(cub->data->win, 3, 0, set_defeult, cub);
 	mlx_hook(cub->data->win, 17, 0, distroy_event, cub);
