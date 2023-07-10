@@ -6,7 +6,7 @@
 /*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:43:27 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/09 08:19:17 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/09 13:01:35 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,17 +102,18 @@ typedef struct s_mx {
 	int		width;
 	int		count;
 	int		print;
-	char 	*NO;
-	char 	*SO;
-	char 	*WE;
-	char 	*EA;
+	char	*NO;
+	char	*SO;
+	char	*WE;
+	char	*EA;
 	int		h;
-	char 	*F;
-	char 	*f;
-	int	i;
-	int	j;
+	char	*F;
+	char	*f;
+	int		i;
+	int		j;
 	float	x;
-	float y;
+	float	y;
+	int		map2_height;
 }				t_mx;
 
 typedef struct s_cub {
@@ -134,4 +135,25 @@ void	exit_strerr(char *str, int err);
 void	render_map(t_cub *cub);
 void	render_player(t_cub *cub);
 
+//////////////////
+void	if_edentifier_is_null(t_mx *mlx);
+void	check_colors(t_mx *mlx);
+int		check_identifier_extension(t_mx *mlx);
+int		check_identifier_format(char **identifier);
+
+void	check_walls(t_mx *mlx);
+
+/////////////////
+
+void	clear_sceen(t_cub *cub);
+int		set_defeult(int keycode, t_cub *cub);
+int		key_hook(int keycode, t_cub *cub);
+int		distroy_event(int keycode, t_cub *cub);
+int		map_has_wall_at(float x, float y, t_cub *cub);
+void	move_player(t_cub *cub);
+
+//////////////////////////
+void	generate3DProjection(t_cub *cub, t_ray **rays);
+void	cast_all_rays(t_cub *cub);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 #endif

@@ -3,7 +3,7 @@ RM		=	rm -f
 CC		=	gcc -Iincludes -I libs/libft/includes #-g -fsanitize=address
 MLXFLG	=	-lmlx -framework OpenGL -framework AppKit
 LIBFT	=	libft/libft.a
-SRCS	=	src/main.c src/khabi_hna.c src/parsing/parsing.c src/utils/error_handler.c $(LIBFT)
+SRCS	=	src/main.c src/khabi_hna.c src/parsing/check_map.c src/parsing/parsing_utils.c src/utils/error_handler.c src/raycasting/raycasting.c src/raycasting/key_hook.c $(LIBFT)
 
 define HEADER_M
    ______      __   _____ ____
