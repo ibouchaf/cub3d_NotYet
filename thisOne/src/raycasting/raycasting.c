@@ -208,6 +208,17 @@ void	cast_all_rays(t_cub *cub)
 	}
 }
 
+// int get_dir(t_cub *cub, int x)
+// {
+// 	if (cub->ray[x]->wasHitVertical && cub->ray[x]->is_facing_left)
+// 		return (WE);
+// 	else if (cub->ray[x]->wasHitVertical && cub->ray[x]->is_facing_right)
+// 		return (EA);
+// 	else if (!cub->ray[x]->wasHitVertical && cub->ray[x]->is_facing_up)
+// 		return (NO);
+// 	return (SO);
+// }
+
 void rect(t_cub *cub, int x, int y, int width, int height)
 {
 	int		i;
