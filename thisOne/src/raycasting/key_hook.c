@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_player.c                                      :+:      :+:    :+:   */
+/*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 12:53:43 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/09 12:57:45 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/14 11:34:31 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	map_has_wall_at(float x, float y, t_cub *cub)
 	map_grid_index_y = floor(y / TILE_SIZE);
 	if (map_grid_index_x >= ft_strlen(cub->mx->map2[map_grid_index_y]))
 		return (1);
-	// printf("%c\n",cub->mx->map2[map_grid_index_y][map_grid_index_x]);
 	return (cub->mx->map2[map_grid_index_y][map_grid_index_x] == '1');
 }
 
@@ -38,25 +37,36 @@ int	distroy_event(int keycode, t_cub *cub)
 int	key_hook(int keycode, t_cub *cub)
 {
 	if (keycode == ESC_KEY)
-		exit(0);
+		exit(EXIT_SUCCESS);
 	else if (keycode == W_KEY || keycode == UP_KEY)
-		cub->player->walkdir = 1;
+		cub->player->vertical = +1;
 	else if (keycode == S_KEY || keycode == DOWN_KEY)
-		cub->player->walkdir = -1;
-	else if (keycode == D_KEY || keycode == RIGHT_KEY)
-		cub->player->turndir = 1;
-	else if (keycode == A_KEY || keycode == LEFT_KEY)
+		cub->player->vertical = -1;
+	else if (keycode == D_KEY)
+		cub->player->horizontal = +1;
+	else if (keycode == A_KEY)
+		cub->player->horizontal = -1;
+	else if (keycode == RIGHT_KEY)
+		cub->player->turndir = +1;
+	else if (keycode == LEFT_KEY)
 		cub->player->turndir = -1;
 	return (0);
 }
 
 int	set_defeult(int keycode, t_cub *cub)
 {
-	if (keycode == W_KEY || keycode == UP_KEY
-		|| keycode == S_KEY || keycode == DOWN_KEY)
-		cub->player->walkdir = 0;
-	else if (keycode == D_KEY || keycode == RIGHT_KEY
-		|| keycode == A_KEY || keycode == LEFT_KEY)
+
+	if (keycode == W_KEY || keycode == UP_KEY)
+		cub->player->vertical = 0;
+	else if (keycode == S_KEY || keycode == DOWN_KEY)
+		cub->player->vertical = 0;
+	else if (keycode == D_KEY)
+		cub->player->horizontal = 0;
+	else if (keycode == A_KEY)
+		cub->player->horizontal = 0;
+	else if (keycode == RIGHT_KEY)
+		cub->player->turndir = 0;
+	else if (keycode == LEFT_KEY)
 		cub->player->turndir = 0;
 	return (0);
 }

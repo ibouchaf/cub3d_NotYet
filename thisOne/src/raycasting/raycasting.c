@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 12:49:48 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/09 13:24:11 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/14 11:41:40 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,26 @@ float	normalize_angle(float angle)
 
 void	move_player(t_cub *cub)
 {
-	float	move_step;
-	float	new_px;
-	float	new_py;
+	float	move_step_ver;
+	float	move_step_hor;
+	float	xstep;
+	float	ystep;
 
+	xstep = 0;
+	ystep = 0;
 	cub->player->angle += cub->player->turndir * cub->player->turnspeed;
-	move_step = cub->player->walkdir * cub->player->walkspeed;
-	new_px = cub->player->x + cos(cub->player->angle) * move_step;
-	new_py = cub->player->y + sin(cub->player->angle) * move_step;
-	if (!map_has_wall_at(new_px, new_py, cub))
+	move_step_ver = cub->player->vertical * cub->player->walkspeed;
+	move_step_hor = cub->player->horizontal * cub->player->walkspeed;
+	xstep += (cos(cub->player->angle) * move_step_ver);
+	xstep += (cos(cub->player->angle + PI / 2) * move_step_hor);
+	ystep += (sin(cub->player->angle) * move_step_ver);
+	ystep += (sin(cub->player->angle + PI / 2) * move_step_hor);
+	xstep *= 5;
+	ystep *= 5;
+	if (!map_has_wall_at(cub->player->x + xstep, cub->player->y + ystep, cub))
 	{
-		cub->player->x = new_px;
-		cub->player->y = new_py;
+		cub->player->x += xstep / 5;
+		cub->player->y += ystep / 5;
 	}
 }
 
@@ -205,19 +213,20 @@ void	cast_all_rays(t_cub *cub)
 		cast_ray(ray_angle, stripid, cub->ray, cub);
 		ray_angle += FOV_ANGLE / NUM_RAYS;
 		stripid++;
+
 	}
 }
 
-// int get_dir(t_cub *cub, int x)
-// {
-// 	if (cub->ray[x]->wasHitVertical && cub->ray[x]->is_facing_left)
-// 		return (WE);
-// 	else if (cub->ray[x]->wasHitVertical && cub->ray[x]->is_facing_right)
-// 		return (EA);
-// 	else if (!cub->ray[x]->wasHitVertical && cub->ray[x]->is_facing_up)
-// 		return (NO);
-// 	return (SO);
-// }
+int get_dir(t_cub *cub, int x)
+{
+	if (cub->ray[x]->wasHitVertical && cub->ray[x]->is_facing_left)
+		return (0);
+	else if (cub->ray[x]->wasHitVertical && cub->ray[x]->is_facing_right)
+		return (1);
+	else if (!cub->ray[x]->wasHitVertical && cub->ray[x]->is_facing_up)
+		return (2);
+	return (3);
+}
 
 void rect(t_cub *cub, int x, int y, int width, int height)
 {
@@ -229,6 +238,16 @@ void rect(t_cub *cub, int x, int y, int width, int height)
 	float	scale2;
 
 	i = 0;
+
+	// exit(0);
+	if (!get_dir(cub, x))
+		cub->texture = cub->sprit->we;
+	else if (get_dir(cub, x) == 1)
+		cub->texture = cub->sprit->so;
+	else if (get_dir(cub, x) == 2)
+		cub->texture = cub->sprit->no;
+	else
+		cub->texture = cub->sprit->ea;
 	scale1 = cub->texture->width / TILE_SIZE;
 	tex_x = cub->ray[x]->wallhitX;
 	if (cub->ray[x]->wasHitVertical)
@@ -267,6 +286,7 @@ void	generate3DProjection(t_cub *cub, t_ray **rays)
 		dis_proj_lane = (WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2);
 		projected_wall_height = (TILE_SIZE / perp_distance) * dis_proj_lane;
 		wall_top_pixel = (WINDOW_HEIGHT / 2) - ((int)projected_wall_height / 2);
+		// init_texture(cub, i);
 		rect(cub, i * WALL_STRIP_WIDTH, wall_top_pixel, 1,
 			(int)projected_wall_height);
 		i++;

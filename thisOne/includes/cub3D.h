@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:43:27 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/09 13:01:35 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/14 10:32:33 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@
 # define WALL_STRIP_WIDTH 1
 # define NUM_RAYS WINDOW_WIDTH
 
+
 typedef struct s_img {
 	void	*img;
 	char	*addr;
@@ -65,14 +66,22 @@ typedef struct s_img {
 	int		height;
 }	t_img;
 
+typedef struct s_sprites {
+	t_img	*no;
+	t_img	*so;
+	t_img	*we;
+	t_img	*ea;
+}	t_sprites;
+
 typedef struct s_player {
 	float	x;
 	float	y;
 	float	angle;
 	int		turndir;
-	int		walkdir;
+	int		walkspeed;
 	float	turnspeed;
-	float	walkspeed;
+	float	vertical;
+	float	horizontal;
 }	t_player;
 
 typedef struct s_data {
@@ -121,6 +130,7 @@ typedef struct s_cub {
 	t_player	*player;
 	t_img		*img;
 	t_img		*texture;
+	t_sprites	*sprit;
 	t_ray		*ray[NUM_RAYS];
 	t_mx		*mx;
 }	t_cub;
@@ -156,4 +166,5 @@ void	move_player(t_cub *cub);
 void	generate3DProjection(t_cub *cub, t_ray **rays);
 void	cast_all_rays(t_cub *cub);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void	init_textures(t_cub *cub);
 #endif

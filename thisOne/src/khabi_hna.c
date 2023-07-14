@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 08:27:39 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/10 19:13:35 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/14 09:54:51 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	check_identifier(t_mx *mlx, int i)
 {
 	char **str = ft_split(mlx->map[i], ' ');
+	str[1] = ft_strtrim(str[1], "\n\t");
 	if (ft_strncmp(str[0], "NO", 3) == 0 && str[1] && ft_strlen_2(str) == 2)
 		return ((mlx->NO = str[1]), 1);
 	else if (ft_strncmp(str[0], "SO", 3) == 0 && str[1] && ft_strlen_2(str) == 2)

@@ -6,13 +6,13 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 08:26:53 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/10 19:13:08 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/14 09:53:06 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-#include "cub3D.h"
+
 
 int	is_number(char **str)
 {
@@ -61,10 +61,10 @@ int	check_identifier_format(char **identifier)
 
 int	check_identifier_extension(t_mx *mlx)
 {
-	if (ft_strncmp(ft_strrchr(mlx->NO, '.'), ".xpm\n", 5) != 0
-		|| ft_strncmp(ft_strrchr(mlx->SO, '.'), ".xpm\n", 5) != 0
-		|| ft_strncmp(ft_strrchr(mlx->WE, '.'), ".xpm\n", 5) != 0
-		|| ft_strncmp(ft_strrchr(mlx->EA, '.'), ".xpm\n", 5) != 0)
+	if (ft_strncmp(ft_strrchr(mlx->NO, '.'), ".xpm", 4) != 0
+		|| ft_strncmp(ft_strrchr(mlx->SO, '.'), ".xpm", 4) != 0
+		|| ft_strncmp(ft_strrchr(mlx->WE, '.'), ".xpm", 4) != 0
+		|| ft_strncmp(ft_strrchr(mlx->EA, '.'), ".xpm", 4) != 0)
 	{
 		return (0);
 	}
