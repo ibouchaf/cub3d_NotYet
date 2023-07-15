@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 10:31:45 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/10 19:51:38 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/15 09:31:23 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void	complete_map(t_mx *mlx)
 	int	i;
 
 	i = 0;
-	// printf("%s\n", mlx->map[mlx->j]);
 	while (mlx->map2_height > i)
 	{
 		tmp = ft_strtrim(mlx->map[mlx->j], " ");

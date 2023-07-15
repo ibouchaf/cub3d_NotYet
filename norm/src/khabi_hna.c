@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   khabi_hna.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 08:27:39 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/14 09:54:51 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/15 09:30:56 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void	init(t_mx *mlx)
 void	parsing_map(t_mx *mlx, char *av)
 {
 	int	fd;
-	int i = 0;
-	int j = 0;
-	int k = 0;
+	int	i = 0;
+	int	j = 0;
+	int	k = 0;
 
 	init(mlx);
 	fd = open(av, O_RDONLY);
@@ -92,11 +92,6 @@ void	parsing_map(t_mx *mlx, char *av)
 		}
 	}
 	check_colors(mlx);
-	// if (!check_identifier_format(ft_split(mlx->NO, ' '))
-	// 	|| !check_identifier_format(ft_split(mlx->SO, ' '))
-	// 	|| !check_identifier_format(ft_split(mlx->WE, ' '))
-	// 	|| !check_identifier_format(ft_split(mlx->EA, ' ')))
-	// 	ft_putstr("Errors in Identifier Format\n");
 	if (!check_identifier_extension(mlx))
 		ft_putstr("Identifiers do not end with .xpm\n");
 	check_walls(mlx);

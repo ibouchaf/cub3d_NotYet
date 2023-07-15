@@ -6,7 +6,7 @@
 /*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:43:27 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/15 08:40:01 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/15 09:20:36 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,10 +132,10 @@ typedef struct s_cub {
 	t_sprites	*sprit;
 	t_ray		*ray[NUM_RAYS];
 	t_mx		*mx;
-	int	isRayFacingDown;
-	int	isRayFacingUp;
-	int	isRayFacingRight;
-	int	isRayFacingLeft;
+	int	is_ray_facing_down;
+	int	is_ray_facing_up;
+	int	is_ray_facing_right;
+	int	is_ray_facing_left;
 		float horzWallHitX;
     float horzWallHitY;
     int horzWallContent;
@@ -176,7 +176,7 @@ int		map_has_wall_at(float x, float y, t_cub *cub);
 void	move_player(t_cub *cub);
 
 //////////////////////////
-void	generate3DProjection(t_cub *cub, t_ray **rays);
+void	generate_projection(t_cub *cub, t_ray **rays);
 void	cast_all_rays(t_cub *cub);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void	init_textures(t_cub *cub);

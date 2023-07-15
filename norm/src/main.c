@@ -6,7 +6,7 @@
 /*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:08:30 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/14 17:56:52 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/15 09:21:30 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ int	setup(t_cub *cub)
 	clear_sceen(cub);
 	move_player(cub);
 	cast_all_rays(cub);
-	generate3DProjection(cub, cub->ray);
+	generate_projection(cub, cub->ray);
 	mlx_put_image_to_window(cub->data->mlx, cub->data->win,
 		cub->img->img, 0, 0);
 	return (0);
 }
+
 t_img	*new_sprite(void *mlx, char *path)
 {
 	t_img	*sprite;

@@ -6,7 +6,7 @@
 /*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 12:49:48 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/15 08:48:19 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/15 09:28:49 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,23 +71,24 @@ float	distance_between_points(float x1, float y1, float x2, float y2)
 	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
 }
 
-float find_vertical_wall_hit(t_ray **rays, int stripId, t_cub *cub)
+float	find_vertical_wall_hit(t_ray **rays, int stripId, t_cub *cub)
 {
-	int		foundVertWallHit;
-	float	xToCheck;
-	float	yToCheck;
+	int		found_vert_wall_hit;
+	float	x_to_check;
+	float	y_to_check;
 
-	foundVertWallHit = FALSE;
+	found_vert_wall_hit = FALSE;
 	while ((cub->xintercept) >= 0 && (cub->xintercept) <= (34 * TILE_SIZE)
-		&& (cub->yintercept) >= 0 && (cub->yintercept) <= (cub->mx->h * TILE_SIZE))
+		&& (cub->yintercept) >= 0
+		&& (cub->yintercept) <= (cub->mx->h * TILE_SIZE))
 	{
-		xToCheck = (cub->xintercept) + (cub->isRayFacingLeft ? -1 : 0);
-		yToCheck = (cub->yintercept);
-		if (map_has_wall_at(xToCheck, yToCheck, cub))
+		x_to_check = (cub->xintercept) + (cub->is_ray_facing_left ? -1 : 0);
+		y_to_check = (cub->yintercept);
+		if (map_has_wall_at(x_to_check, y_to_check, cub))
 		{
 			cub->vertWallHitX = (cub->xintercept);
 			cub->vertWallHitY = (cub->yintercept);
-			foundVertWallHit = TRUE;
+			found_vert_wall_hit = TRUE;
 			break ;
 		}
 		else
@@ -96,7 +97,7 @@ float find_vertical_wall_hit(t_ray **rays, int stripId, t_cub *cub)
 			(cub->yintercept) += cub->ystep;
 		}
 	}
-	float vertHitDistance = foundVertWallHit
+	float vertHitDistance = found_vert_wall_hit
 		? distance_between_points(cub->player->x, cub->player->y, cub->vertWallHitX, cub->vertWallHitY)
 		: INT_MAX;
 	return (vertHitDistance);
@@ -105,40 +106,41 @@ float find_vertical_wall_hit(t_ray **rays, int stripId, t_cub *cub)
 void calculate_vertical_intersection(float rayAngle, t_cub* cub)
 {
 	cub->xintercept = floor(cub->player->x / TILE_SIZE) * TILE_SIZE;
-	if (cub->isRayFacingRight)
+	if (cub->is_ray_facing_right)
 		cub->xintercept += TILE_SIZE;
 	cub->yintercept = cub->player->y
 		+ (cub->xintercept - cub->player->x) * tan(rayAngle);
 	cub->xstep = TILE_SIZE;
-	if (cub->isRayFacingLeft)
+	if (cub->is_ray_facing_left)
 		cub->xstep *= -1;
 	cub->ystep = TILE_SIZE * tan(rayAngle);
-	if (cub->isRayFacingUp && (cub->ystep > 0))
+	if (cub->is_ray_facing_up && (cub->ystep > 0))
 		cub->ystep *= -1;
-	if (cub->isRayFacingDown && (cub->ystep < 0))
+	if (cub->is_ray_facing_down && (cub->ystep < 0))
 		cub->ystep *= -1;
 }
 
 float find_horizontal_wall_hit(t_ray **rays, int stripId, t_cub *cub)
 {
-	int	foundHorzWallHit;
-	float xToCheck;
-	float yToCheck;
+	int		found_horz_wall_hit;
+	float	x_to_check;
+	float	y_to_check;
 
-	foundHorzWallHit = FALSE;
+	found_horz_wall_hit = FALSE;
 	cub->horzWallHitX = 0;
 	cub->horzWallHitY = 0;
 	cub->horzWallContent = 0;
 	while ((cub->xintercept) >= 0 && (cub->xintercept) <= (34 * TILE_SIZE)
-		&& (cub->yintercept) >= 0 && (cub->yintercept) <= (cub->mx->h * TILE_SIZE))
+		&& (cub->yintercept) >= 0
+		&& (cub->yintercept) <= (cub->mx->h * TILE_SIZE))
 	{
-		xToCheck = (cub->xintercept);
-		yToCheck = (cub->yintercept) + (cub->isRayFacingUp ? -1 : 0);
-		if (map_has_wall_at(xToCheck, yToCheck, cub))
+		x_to_check = (cub->xintercept);
+		y_to_check = (cub->yintercept) + (cub->is_ray_facing_up ? -1 : 0);
+		if (map_has_wall_at(x_to_check, y_to_check, cub))
 		{
 			cub->horzWallHitX = (cub->xintercept);
 			cub->horzWallHitY = (cub->yintercept);
-			foundHorzWallHit = TRUE;
+			found_horz_wall_hit = TRUE;
 			break ;
 		}
 		else
@@ -147,7 +149,7 @@ float find_horizontal_wall_hit(t_ray **rays, int stripId, t_cub *cub)
 			(cub->yintercept) += cub->ystep;
 		}
 	}
-	float horzHitDistance = foundHorzWallHit
+	float horzHitDistance = found_horz_wall_hit
 		? distance_between_points(cub->player->x, cub->player->y, cub->horzWallHitX, cub->horzWallHitY)
 		: INT_MAX;
 	return (horzHitDistance);
@@ -156,63 +158,66 @@ float find_horizontal_wall_hit(t_ray **rays, int stripId, t_cub *cub)
 void calculate_horizontal_intersection(float rayAngle, t_cub *cub)
 {
 	cub->yintercept = floor(cub->player->y / TILE_SIZE) * TILE_SIZE;
-	if (cub->isRayFacingDown)
+	if (cub->is_ray_facing_down)
 		cub->yintercept += TILE_SIZE;
 	cub->xintercept = cub->player->x
 		+ (cub->yintercept - cub->player->y) / tan(rayAngle);
 	cub->ystep = TILE_SIZE;
-	if (cub->isRayFacingUp)
+	if (cub->is_ray_facing_up)
 		cub->ystep *= -1;
 	cub->xstep = TILE_SIZE / tan(rayAngle);
-	if ((cub->isRayFacingLeft && (cub->xstep > 0)))
+	if ((cub->is_ray_facing_left && (cub->xstep > 0)))
 		cub->xstep *= -1;
-	if ((cub->isRayFacingRight && (cub->xstep < 0)))
+	if ((cub->is_ray_facing_right && (cub->xstep < 0)))
 		cub->xstep *= -1;
 }
 
 void calculate_ray_direction(float rayAngle, t_cub *cub)
 {
-	(cub->isRayFacingDown) = (rayAngle > 0 && rayAngle < PI);
-	(cub->isRayFacingUp) = !((cub->isRayFacingDown));
-	(cub->isRayFacingRight) = (rayAngle < 0.5 * PI || rayAngle > 1.5 * PI);
-	(cub->isRayFacingLeft) = !((cub->isRayFacingRight));
+	(cub->is_ray_facing_down) = (rayAngle > 0 && rayAngle < PI);
+	(cub->is_ray_facing_up) = !((cub->is_ray_facing_down));
+	(cub->is_ray_facing_right) = (rayAngle < 0.5 * PI || rayAngle > 1.5 * PI);
+	(cub->is_ray_facing_left) = !((cub->is_ray_facing_right));
+}
+
+void	assign_ray_ver(t_ray **rays, int stripId, float distance, t_cub *cub)
+{
+	rays[stripId]->distance = distance;
+	rays[stripId]->wallhitX = cub->vertWallHitX;
+	rays[stripId]->wallhitY = cub->vertWallHitY;
+	rays[stripId]->wallHitContent = cub->vertWallContent;
+	rays[stripId]->wasHitVertical = TRUE;
+}
+
+void	assign_ray_horiz(t_ray **rays, int stripId, float distance, t_cub *cub)
+{
+	rays[stripId]->distance = distance;
+	rays[stripId]->wallhitX = cub->horzWallHitX;
+	rays[stripId]->wallhitY = cub->horzWallHitY;
+	rays[stripId]->wallHitContent = cub->horzWallContent;
+	rays[stripId]->wasHitVertical = FALSE;
 }
 
 void cast_ray(float rayAngle, int stripId, t_ray **rays, t_cub *cub)
 {
-	rayAngle = normalize_angle(rayAngle);
-	// float 	xintercept,yintercept, xstep, ystep;
-	float 	horzHitDistance;
-	float	vertHitDistance;
+	float		horz_hit_distance;
+	float		vert_hit_distance;
 
+	rayAngle = normalize_angle(rayAngle);
 	calculate_ray_direction(rayAngle, cub);
 	calculate_horizontal_intersection(rayAngle, cub);
-	horzHitDistance = find_horizontal_wall_hit(rays, stripId, cub);
+	horz_hit_distance = find_horizontal_wall_hit(rays, stripId, cub);
 	calculate_vertical_intersection(rayAngle, cub);
-	vertHitDistance = find_vertical_wall_hit(rays, stripId, cub);
-	// // Calculate both horizontal and vertical hit distances and choose the smallest one
-
-	if (vertHitDistance < horzHitDistance)
-	{
-		rays[stripId]->distance = vertHitDistance;
-		rays[stripId]->wallhitX = cub->vertWallHitX;
-		rays[stripId]->wallhitY = cub->vertWallHitY;
-		rays[stripId]->wallHitContent = cub->vertWallContent;
-		rays[stripId]->wasHitVertical = TRUE;
-	}
+	vert_hit_distance = find_vertical_wall_hit(rays, stripId, cub);
+	if (vert_hit_distance < horz_hit_distance)
+		assign_ray_ver(rays, stripId, vert_hit_distance, cub);
 	else
-	{
-		rays[stripId]->distance = horzHitDistance;
-		rays[stripId]->wallhitX = cub->horzWallHitX;
-		rays[stripId]->wallhitY = cub->horzWallHitY;
-		rays[stripId]->wallHitContent = cub->horzWallContent;
-		rays[stripId]->wasHitVertical = FALSE;
-	}
+		assign_ray_horiz(rays, stripId, horz_hit_distance, cub);
 	rays[stripId]->rayAngle = rayAngle;
-	rays[stripId]->is_facing_down = cub->isRayFacingDown;
-	rays[stripId]->is_facing_up = cub->isRayFacingUp;
-	rays[stripId]->is_facing_left = cub->isRayFacingLeft;
-	rays[stripId]->is_facing_right = cub->isRayFacingRight;
+	rays[stripId]->is_facing_down = cub->is_ray_facing_down;
+	rays[stripId]->is_facing_up = cub->is_ray_facing_up;
+	rays[stripId]->is_facing_left = cub->is_ray_facing_left;
+	rays[stripId]->is_facing_right = cub->is_ray_facing_right;
 }
 
 void	cast_all_rays(t_cub *cub)
@@ -273,14 +278,15 @@ void rect(t_cub *cub, int x, int y, int width, int height)
 			if ((y + j) >= WINDOW_HEIGHT)
 				break ;
 			tex_y = (float) j * scale2;
-			my_mlx_pixel_put(cub->img, x + i, y + j, get_pixel_from_image(cub->texture, tex_x, tex_y));
+			my_mlx_pixel_put(cub->img, x + i, y + j,
+				get_pixel_from_image(cub->texture, tex_x, tex_y));
 			j++;
 		}
 		i++;
 	}
 }
 
-void	generate3DProjection(t_cub *cub, t_ray **rays)
+void	generate_projection(t_cub *cub, t_ray **rays)
 {
 	int		i;
 	float	perp_distance;

@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 08:26:53 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/14 09:53:06 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/15 09:31:43 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-
 
 int	is_number(char **str)
 {
@@ -26,7 +24,7 @@ int	is_number(char **str)
 		j = 0;
 		while (str[i][j] && str[i][j] != '\n')
 		{
-			if ((str[i][j] < '0' || str[i][j] > '9') )
+			if ((str[i][j] < '0' || str[i][j] > '9'))
 				return (1);
 			j++;
 		}
@@ -55,7 +53,6 @@ int	check_identifier_format(char **identifier)
 
 		return (0);
 	}
-	// mlx->NO = identifier[1];
 	return (1);
 }
 
