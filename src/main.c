@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:08:30 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/15 10:27:48 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/15 23:14:21 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,8 @@ t_img	*new_sprite(void *mlx, char *path)
 	return (sprite);
 }
 
-void	init_texture(t_cub *cub)
+void	initialize(t_cub *cub, int i)
 {
-	cub->sprit->no = new_sprite(cub->data->mlx, cub->mx->NO);
-	cub->sprit->so = new_sprite(cub->data->mlx, cub->mx->SO);
-	cub->sprit->we = new_sprite(cub->data->mlx, cub->mx->WE);
-	cub->sprit->ea = new_sprite(cub->data->mlx, cub->mx->EA);
-}
-
-
-void	initialize(t_cub *cub)
-{
-	int	i;
-
-	i = -1;
 	cub->data = malloc(sizeof(t_data));
 	cub->player = malloc(sizeof(t_player));
 	while (i < NUM_RAYS)
@@ -72,18 +60,21 @@ void	initialize(t_cub *cub)
 	cub->img->img = mlx_new_image(cub->data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	cub->img->addr = mlx_get_data_addr(cub->img->img, &cub->img->bits_per_pixel,
 			&cub->img->line_length, &cub->img->endian);
-	init_texture(cub);
+	cub->sprit->no = new_sprite(cub->data->mlx, cub->mx->NO);
+	cub->sprit->so = new_sprite(cub->data->mlx, cub->mx->SO);
+	cub->sprit->we = new_sprite(cub->data->mlx, cub->mx->WE);
+	cub->sprit->ea = new_sprite(cub->data->mlx, cub->mx->EA);
 }
 
 float	get_ang(t_mx *mx)
 {
 	if (mx->p_dir == 'N')
-		return PI / 2;
+		return (PI / 2);
 	else if (mx->p_dir == 'S')
 		return ((3 * PI) / 2);
 	else if (mx->p_dir == 'E')
 		return (0);
-	return PI;
+	return (PI);
 }
 
 int	main(int ac, char **av)
@@ -95,14 +86,14 @@ int	main(int ac, char **av)
 	cub = (t_cub *)malloc(sizeof(t_cub));
 	cub->mx = malloc(sizeof(t_mx));
 	parsing_map(cub->mx, av[1]);
-	initialize(cub);
+	initialize(cub, -1);
 	cub->player->x = (cub->mx->y * TILE_SIZE) + 32;
 	cub->player->y = (cub->mx->x * TILE_SIZE) + 32;
 	cub->player->angle = get_ang(cub->mx);
 	cub->player->turndir = 0;
 	cub->player->horizontal = 0;
 	cub->player->vertical = 0;
-	cub->player->turnspeed = 5 * (PI / 180);
+	cub->player->turnspeed = 8 * (PI / 180);
 	cub->player->walkspeed = 10;
 	mlx_hook(cub->data->win, 2, 0, key_hook, cub);
 	mlx_hook(cub->data->win, 3, 0, set_defeult, cub);
