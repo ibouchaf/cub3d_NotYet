@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 10:31:45 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/15 11:12:49 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/16 18:35:14 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,30 +134,30 @@ void	check_walls(t_mx *mlx)
 	complete_map(mlx);
 	is_surrounded_by_walls(mlx);
 	mlx->i = 1;
-	while (mlx->map2_height > mlx->i + 1)
-	{
-		mlx->j = -1;
-		while (mlx->map2[mlx->i][++mlx->j])
-		{
-			if (mlx->map2[mlx->i][mlx->j] == '0'
-				|| mlx->map2[mlx->i][mlx->j] == 'N')
-			{
-				if (mlx->j > (int)ft_strlen(mlx->map2[mlx->i + 1])
-					|| mlx->j > (int)ft_strlen(mlx->map2[mlx->i - 1])
-					|| mlx->j == 0)
-					ft_putstr("Player can't go outside");
-				if (mlx->map2[mlx->i][mlx->j - 1] == ' '
-					|| mlx->map2[mlx->i][mlx->j - 1] == '\n'
-					|| mlx->map2[mlx->i][mlx->j + 1] == ' '
-					|| mlx->map2[mlx->i][mlx->j + 1] == '\n'
-					|| mlx->map2[mlx->i - 1][mlx->j] == ' '
-					|| mlx->map2[mlx->i - 1][mlx->j] == '\n'
-					|| mlx->map2[mlx->i + 1][mlx->j] == ' '
-					|| mlx->map2[mlx->i + 1][mlx->j] == '\n')
-					ft_putstr("Errors in map \n");
-			}
-			mlx->j++;
-		}
-		mlx->i++;
-	}
+	// while (mlx->map2_height > mlx->i + 1)
+	// {
+	// 	mlx->j = -1;
+	// 	while (mlx->map2[mlx->i][++mlx->j])
+	// 	{
+	// 		if (mlx->map2[mlx->i][mlx->j] == '0'
+	// 			|| mlx->map2[mlx->i][mlx->j] == 'N')
+	// 		{
+	// 			if (mlx->j > (int)ft_strlen(mlx->map2[mlx->i + 1])
+	// 				|| mlx->j > (int)ft_strlen(mlx->map2[mlx->i - 1])
+	// 				|| mlx->j == 0)
+	// 				ft_putstr("Player can't go outside");
+	// 			if (mlx->map2[mlx->i][mlx->j - 1] == ' '
+	// 				|| mlx->map2[mlx->i][mlx->j - 1] == '\n'
+	// 				|| mlx->map2[mlx->i][mlx->j + 1] == ' '
+	// 				|| mlx->map2[mlx->i][mlx->j + 1] == '\n'
+	// 				|| mlx->map2[mlx->i - 1][mlx->j] == ' '
+	// 				|| mlx->map2[mlx->i - 1][mlx->j] == '\n'
+	// 				|| mlx->map2[mlx->i + 1][mlx->j] == ' '
+	// 				|| mlx->map2[mlx->i + 1][mlx->j] == '\n')
+	// 				ft_putstr("Errors in map \n");
+	// 		}
+	// 		mlx->j++;
+	// 	}
+	// 	mlx->i++;
+	// }
 }

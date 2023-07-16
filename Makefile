@@ -1,6 +1,6 @@
 NAME	=	cub3D
 RM		=	rm -f
-CC		=	gcc -Iincludes -I libs/libft/includes -g -fsanitize=address
+CC		=	gcc -Iincludes -I libs/libft/includes #-g -fsanitize=address
 MLXFLG	=	-lmlx -framework OpenGL -framework AppKit
 LIBFT	=	libft/libft.a
 SRCS	=	src/main.c src/parsing/parsing.c src/parsing/check_map.c\

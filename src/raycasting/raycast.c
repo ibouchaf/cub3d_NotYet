@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 12:49:48 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/15 23:16:29 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/16 18:32:01 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,38 @@ void	cast_all_rays(t_cub *cub)
 	}
 }
 
+void	render_ceiling(t_cub *cub, int x, int y, int width, int height)
+{
+	int		i[2];
+
+	i[0] = -1;
+	while (++i[0] < width)
+	{
+		i[1] = -1;
+		while (++i[1] < height)
+		{
+			my_mlx_pixel_put(cub->img, x + i[0], y + i[1],
+				cub->mx->color1);
+		}
+	}
+}
+void	render_floor(t_cub *cub, int x, int y, int width, int height)
+{
+	int		i[2];
+
+	i[0] = -1;
+	while (++i[0] < width)
+	{
+		i[1] = -1;
+		while (++i[1] < height)
+		{
+			my_mlx_pixel_put(cub->img, x + i[0], y + i[1],
+				cub->mx->color2);
+		}
+	}
+}
+
+
 void	rect(t_cub *cub, int x, int y, int width, int height)
 {
 	int		i[2];
@@ -86,7 +118,6 @@ void	rect(t_cub *cub, int x, int y, int width, int height)
 		tex[0] = cub->ray[x]->wallhitY;
 	tex[0] = fmod(((float)tex[0] * scale[0]), cub->texture->width);
 	scale[1] = ((double)cub->texture->height / height);
-
 	while (++i[0] < width)
 	{
 		i[1] = -1;
@@ -95,12 +126,8 @@ void	rect(t_cub *cub, int x, int y, int width, int height)
 			if ((y + i[1]) >= WINDOW_HEIGHT)
 				break ;
 			tex[1] = (float) i[1] * scale[1];
-			if (width > 1)
-				color = 0X9BF274;
-			else
-				color = get_pixel_from_image(cub->texture, tex[0], tex[1]);
 			my_mlx_pixel_put(cub->img, x + i[0], y + i[1],
-				color);
+				get_pixel_from_image(cub->texture, tex[0], tex[1]));
 		}
 	}
 }
@@ -114,8 +141,8 @@ void	generate_projection(t_cub *cub, t_ray **rays)
 	int		wall_top_pixel;
 
 	i = 0;
-	rect(cub, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT / 2);
-	rect(cub, 0, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT);
+	render_ceiling(cub, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT / 2);
+	render_floor(cub, 0, WINDOW_HEIGHT / 2, WINDOW_WIDTH, WINDOW_HEIGHT);
 	while (i < NUM_RAYS)
 	{
 		perp_distance = rays[i]->distance * cos(rays[i]->rayAngle

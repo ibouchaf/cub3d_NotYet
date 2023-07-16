@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:08:30 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/15 23:14:21 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/16 20:44:01 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,21 @@ float	get_ang(t_mx *mx)
 	return (PI);
 }
 
+int rgb_to_decimal(char *s) {
+	char **color = ft_split(s, ',');
+	int	red;
+	int	green;
+	int	blue;
+	int decimal_value;
+
+	red = ft_atoi(color[0]);
+	green = ft_atoi(color[1]);
+	blue = ft_atoi(color[2]);
+	decimal_value = (red << 16) + (green << 8) + blue;
+	free_tab(color);
+	return decimal_value;
+}
+
 int	main(int ac, char **av)
 {
 	t_cub	*cub;
@@ -86,6 +101,9 @@ int	main(int ac, char **av)
 	cub = (t_cub *)malloc(sizeof(t_cub));
 	cub->mx = malloc(sizeof(t_mx));
 	parsing_map(cub->mx, av[1]);
+	// system("leaks cub3D");
+	cub->mx->color1 = rgb_to_decimal(cub->mx->F);
+	cub->mx->color2 = rgb_to_decimal(cub->mx->f);
 	initialize(cub, -1);
 	cub->player->x = (cub->mx->y * TILE_SIZE) + 32;
 	cub->player->y = (cub->mx->x * TILE_SIZE) + 32;
@@ -93,8 +111,8 @@ int	main(int ac, char **av)
 	cub->player->turndir = 0;
 	cub->player->horizontal = 0;
 	cub->player->vertical = 0;
-	cub->player->turnspeed = 8 * (PI / 180);
-	cub->player->walkspeed = 10;
+	cub->player->turnspeed = 10 * (PI / 180);
+	cub->player->walkspeed = 40;
 	mlx_hook(cub->data->win, 2, 0, key_hook, cub);
 	mlx_hook(cub->data->win, 3, 0, set_defeult, cub);
 	mlx_hook(cub->data->win, 17, 0, distroy_event, cub);

@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:43:27 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/15 22:33:06 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/16 16:34:46 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,8 @@ typedef struct s_mx
 	float p_dir;
 	char *F;
 	char *f;
+	int	color1;
+	int	color2;
 	int i;
 	int j;
 	float x;

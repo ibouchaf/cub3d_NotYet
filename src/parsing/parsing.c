@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 08:27:39 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/15 12:39:37 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/16 20:35:30 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int	check_identifier(t_mx *mlx, int i)
 		&& str[1] && ft_strlen_2(str) == 2)
 		return ((mlx->EA = str[1]), 1);
 	else if (ft_strncmp(str[0], "F", 2) == 0
-		&& str[1] && ft_strlen_2(str) == 2)
-		return ((mlx->F = str[1]), 1);
+		&& str[1])
+		return ((mlx->F = ft_strchr( mlx->map[i], 'F') + 1), 1);
 	else if (ft_strncmp(str[0], "C", 2) == 0
-		&& str[1] && ft_strlen_2(str) == 2)
-		return ((mlx->f = str[1]), 1);
+		&& str[1])
+		return ((mlx->f = ft_strchr( mlx->map[i], 'C') + 1), 1);
 	return (0);
 }
 

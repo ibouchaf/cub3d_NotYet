@@ -6,32 +6,11 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 08:26:53 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/15 12:39:54 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/16 21:05:39 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-int	is_number(char **str)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		j = 0;
-		while (str[i][j] && str[i][j] != '\n')
-		{
-			if ((str[i][j] < '0' || str[i][j] > '9'))
-				return (1);
-			j++;
-		}
-		i++;
-	}
-	return (0);
-}
 
 int	is_range(char **str)
 {
@@ -41,6 +20,34 @@ int	is_range(char **str)
 		return (1);
 	return (0);
 }
+
+int	is_number(char **str)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+
+	i = 0;
+	j = 0;
+	if (is_range(str))
+		return (1);
+	while (str[i])
+	{
+		tmp = ft_strtrim(str[i], " \t");
+		j = 0;
+		while (tmp[j] && tmp[j] != '\n')
+		{
+			if (!ft_isdigit(tmp[j]))
+				return (1);
+			j++;
+		}
+		free(tmp);
+		i++;
+	}
+	return (0);
+}
+
+
 
 int	check_identifier_format(char **identifier)
 {
@@ -55,19 +62,24 @@ int	check_identifier_format(char **identifier)
 	return (1);
 }
 
-int	ft_strfassila(char *s)
+int	ft_comma(char *s)
 {
-	int	i;
-	int	len;
+	int		i;
+	int		len;
+	char	*tmp;
 
 	i = 0;
 	len = 0;
-	while (s[i])
+	tmp = ft_strtrim(s, " \t\n");
+	if (!ft_isdigit(tmp[0]))
+		return (0);
+	while (tmp[i])
 	{
-		if (s[i] == ',')
+		if (tmp[i] == ',')
 			len++;
 		i++;
 	}
+	free(tmp);
 	return (len);
 }
 
@@ -76,17 +88,12 @@ void	check_colors(t_mx *mlx)
 	char	**color1;
 	char	**color2;
 
-	color1 = NULL;
-	color2 = NULL;
-	if (mlx->F[0] < '0' || mlx->F[0] > '9'
-		|| mlx->f[0] < '0' || mlx->f[0] > '9')
-		ft_putstr("Errors In Colors : starting with comma\n");
-	if (ft_strfassila(mlx->F) != 2 || ft_strfassila(mlx->f) != 2)
-		ft_putstr("Errors In Colors : check the comma\n");
+	if (ft_comma(mlx->F) != 2 || ft_comma(mlx->f) != 2)
+		ft_putstr("Errors In Colors\n");
 	color1 = ft_split(mlx->F, ',');
 	color2 = ft_split(mlx->f, ',');
 	if (is_number(color1) == 1 || is_number(color2) == 1)
-		ft_putstr("Color values should be numeric\n");
-	if (is_range(color1) || is_range(color2))
-		ft_putstr("Color values should be within range\n");
+		ft_putstr("Errors In Colors\n");
+	free_tab(color1);
+	free_tab(color2);
 }
