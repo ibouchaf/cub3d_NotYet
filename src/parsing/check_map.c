@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 10:31:45 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/16 18:35:14 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/17 08:58:26 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,24 +81,33 @@ void	complete_map(t_mx *mlx)
 	len = 0;
 	while (mlx->map2_height > i)
 	{
-		tmp = ft_strtrim(mlx->map[mlx->j], " ");
-		if (ft_strcmp(tmp, "\n") && ft_strcmp(tmp, ""))
-		{
-			if (len)
-				exit(69);
-			mlx->map2[mlx->i++] = mlx->map[mlx->j];
-		}
-		else
-			len = 1;
-		mlx->j++;
-		free(tmp);
+		tmp = ft_strtrim(mlx->map[mlx->j++], "\n");
+		mlx->map2[mlx->i++] = tmp;
 		i++;
 	}
-	mlx->h = mlx->i;
 	mlx->map2[mlx->i] = NULL;
 	mlx->width = get_long_line(mlx->map2);
 	i = -1;
 	len = 0;
+
+	// while (mlx->map2[++i])
+	// {
+	// 	j = -1;
+	// 	while (mlx->map2[i][++j])
+	// 	{
+	// 		if (ft_strchr("NWES", mlx->map2[i][j]))
+	// 		{
+	// 			mlx->x = i;
+	// 			mlx->y = j;
+	// 			mlx->p_dir = mlx->map2[i][j];
+	// 			len++;
+	// 		}
+	// 		if (!ft_strchr("NWES10\n ", mlx->map2[i][j]))
+	// 			ft_putstr("kayna chi haja mn ghir player\n");
+	// 	}
+	// }
+	// if (len != 1)
+	// 	ft_putstr("Errors in player\n");
 	while (mlx->map2[++i])
 	{
 		j = -1;
@@ -111,8 +120,22 @@ void	complete_map(t_mx *mlx)
 				mlx->p_dir = mlx->map2[i][j];
 				len++;
 			}
-			if (!ft_strchr("NWES10\n ", mlx->map2[i][j]))
+			if (!ft_strchr("NWES10 ", mlx->map2[i][j]))
 				ft_putstr("kayna chi haja mn ghir player\n");
+			if (mlx->map2[i][j] == '0'
+				|| mlx->map2[i][j] == 'N')
+			{
+				if (j > (int)ft_strlen(mlx->map2[i + 1])
+					|| i == 0
+					|| j > (int)ft_strlen(mlx->map2[i - 1])
+					|| j == 0 )
+					ft_putstr("Player can't go outside");
+					if (mlx->map2[i][j - 1] == ' ' || mlx->map2[i][j - 1] == '\0'
+					|| mlx->map2[i][j + 1] == ' ' || mlx->map2[i][j + 1] == '\0'
+					|| mlx->map2[i - 1][j] == ' ' || mlx->map2[i - 1][j] == '\0'
+					|| mlx->map2[i + 1][j] == ' ' || mlx->map2[i + 1][j] == '\0')
+					ft_putstr("Errors in map \n");
+			}
 		}
 	}
 	if (len != 1)
@@ -128,11 +151,11 @@ void	check_walls(t_mx *mlx)
 	mlx->j = height_map2(mlx);
 	mlx->map2_height = mlx->height - mlx->j;
 	mlx->map2 = malloc(sizeof(char *) * (mlx->map2_height + 1));
-	while (++i < mlx->map2_height)
-		mlx->map2[i] = NULL;
+	// while (++i < mlx->map2_height)
+	// 	mlx->map2[i] = NULL;
 	mlx->i = 0;
 	complete_map(mlx);
-	is_surrounded_by_walls(mlx);
+	// is_surrounded_by_walls(mlx);
 	mlx->i = 1;
 	// while (mlx->map2_height > mlx->i + 1)
 	// {

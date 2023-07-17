@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 21:49:09 by ael-bako          #+#    #+#             */
-/*   Updated: 2023/07/15 22:22:38 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/17 08:24:16 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ float	find_vertical_wall_hit(t_ray **rays, int stripId, t_cub *cub)
 	while ((cub->xintercept) >= 0
 		&& (cub->xintercept) <= (cub->mx->width * TILE_SIZE)
 		&& (cub->yintercept) >= 0
-		&& (cub->yintercept) <= (cub->mx->h * TILE_SIZE))
+		&& (cub->yintercept) <= (cub->mx->height * TILE_SIZE))
 	{
 		x_to_check = (cub->xintercept) + is_facing(cub->is_ray_facing_left);
 		y_to_check = (cub->yintercept);
@@ -86,7 +86,7 @@ float	find_horizontal_wall_hit(t_ray **rays, int stripId, t_cub *cub)
 	while ((cub->xintercept) >= 0
 		&& (cub->xintercept) <= (cub->mx->width * TILE_SIZE)
 		&& (cub->yintercept) >= 0
-		&& (cub->yintercept) <= (cub->mx->h * TILE_SIZE))
+		&& (cub->yintercept) <= (cub->mx->height * TILE_SIZE))
 	{
 		x_to_check = (cub->xintercept);
 		y_to_check = (cub->yintercept) + is_facing(cub->is_ray_facing_up);

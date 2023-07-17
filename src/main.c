@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:08:30 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/16 20:44:01 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/17 07:26:51 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,8 @@ int	main(int ac, char **av)
 	cub->player->turndir = 0;
 	cub->player->horizontal = 0;
 	cub->player->vertical = 0;
-	cub->player->turnspeed = 10 * (PI / 180);
-	cub->player->walkspeed = 40;
+	cub->player->turnspeed = 4 * (PI / 180);
+	cub->player->walkspeed = 25;
 	mlx_hook(cub->data->win, 2, 0, key_hook, cub);
 	mlx_hook(cub->data->win, 3, 0, set_defeult, cub);
 	mlx_hook(cub->data->win, 17, 0, distroy_event, cub);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 12:53:43 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/14 21:35:54 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/17 08:24:25 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	map_has_wall_at(float x, float y, t_cub *cub)
 	int	map_grid_index_x;
 	int	map_grid_index_y;
 
-	if (x < 0 || y < 0 || (y >= (cub->mx->h * TILE_SIZE)))
+	if (x < 0 || y < 0 || (y >= (cub->mx->height * TILE_SIZE)))
 		return (1);
 	map_grid_index_x = floor(x / TILE_SIZE);
 	map_grid_index_y = floor(y / TILE_SIZE);

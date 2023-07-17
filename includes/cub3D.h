@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:43:27 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/16 16:34:46 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/17 08:23:29 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ typedef struct s_mx
 	char *SO;
 	char *WE;
 	char *EA;
-	int h;
+	// int h;
 	float p_dir;
 	char *F;
 	char *f;
