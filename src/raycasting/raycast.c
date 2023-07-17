@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 12:49:48 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/16 18:32:01 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/17 10:05:59 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	render_ceiling(t_cub *cub, int x, int y, int width, int height)
 		while (++i[1] < height)
 		{
 			my_mlx_pixel_put(cub->img, x + i[0], y + i[1],
-				cub->mx->color1);
+				cub->mx->color2);
 		}
 	}
 }
@@ -97,7 +97,7 @@ void	render_floor(t_cub *cub, int x, int y, int width, int height)
 		while (++i[1] < height)
 		{
 			my_mlx_pixel_put(cub->img, x + i[0], y + i[1],
-				cub->mx->color2);
+				cub->mx->color1);
 		}
 	}
 }
@@ -123,8 +123,6 @@ void	rect(t_cub *cub, int x, int y, int width, int height)
 		i[1] = -1;
 		while (++i[1] < height)
 		{
-			if ((y + i[1]) >= WINDOW_HEIGHT)
-				break ;
 			tex[1] = (float) i[1] * scale[1];
 			my_mlx_pixel_put(cub->img, x + i[0], y + i[1],
 				get_pixel_from_image(cub->texture, tex[0], tex[1]));

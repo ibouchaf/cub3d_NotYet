@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 21:46:42 by ael-bako          #+#    #+#             */
-/*   Updated: 2023/07/17 09:09:09 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/17 09:57:52 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,10 @@ void	move_player(t_cub *cub)
 	xstep += (cos(cub->player->angle + PI / 2) * move_step_hor);
 	ystep += (sin(cub->player->angle) * move_step_ver);
 	ystep += (sin(cub->player->angle + PI / 2) * move_step_hor);
-	xstep *= 1.5;
-	ystep *= 1.5;
-	if (!map_has_wall_at(cub->player->x + xstep, cub->player->y + ystep, cub))
-	{
-		cub->player->x += xstep / 1.5;
-		cub->player->y += ystep / 1.5;
-	}
+	xstep *= 5;
+	ystep *= 5;
+	if (!map_has_wall_at(cub->player->x + xstep, cub->player->y, cub))
+		cub->player->x += xstep / 5;
+	if (!map_has_wall_at(cub->player->x, cub->player->y + ystep, cub))
+		cub->player->y += ystep / 5;
 }
