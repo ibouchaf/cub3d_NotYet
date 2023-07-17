@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:08:30 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/17 10:05:22 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/17 10:53:48 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ float	get_ang(t_mx *mx)
 	else if (mx->p_dir == 'S')
 		return ((3 * PI) / 2);
 	else if (mx->p_dir == 'E')
-		return (0);
-	return (PI);
+		return (PI);
+	return (0);
 }
 
 int rgb_to_decimal(char *s) {

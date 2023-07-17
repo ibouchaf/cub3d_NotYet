@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 21:50:53 by ael-bako          #+#    #+#             */
-/*   Updated: 2023/07/15 22:38:09 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/17 11:03:22 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ t_img	*get_dir(t_cub *cub, int x)
 	if (cub->ray[x]->wasHitVertical && cub->ray[x]->is_facing_left)
 		return (cub->sprit->we);
 	else if (cub->ray[x]->wasHitVertical && cub->ray[x]->is_facing_right)
-		return (cub->sprit->so);
+		return (cub->sprit->ea);
 	else if (!cub->ray[x]->wasHitVertical && cub->ray[x]->is_facing_up)
 		return (cub->sprit->no);
-	return (cub->sprit->ea);
+	return (cub->sprit->so);
 }
 
 float	distance_between_points(float x1, float y1, float x2, float y2)
