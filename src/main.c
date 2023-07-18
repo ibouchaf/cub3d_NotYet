@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:08:30 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/17 10:53:48 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/18 13:21:04 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ int	main(int ac, char **av)
 	cub = (t_cub *)malloc(sizeof(t_cub));
 	cub->mx = malloc(sizeof(t_mx));
 	parsing_map(cub->mx, av[1]);
-	// system("leaks cub3D");
 	cub->mx->color1 = rgb_to_decimal(cub->mx->F);
 	cub->mx->color2 = rgb_to_decimal(cub->mx->f);
 	initialize(cub, -1);
@@ -118,4 +117,5 @@ int	main(int ac, char **av)
 	mlx_hook(cub->data->win, 17, 0, distroy_event, cub);
 	mlx_loop_hook(cub->data->mlx, setup, cub);
 	mlx_loop(cub->data->mlx);
+	// system("leaks cub3D");
 }

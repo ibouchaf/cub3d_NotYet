@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 08:26:53 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/16 21:05:39 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/18 13:49:16 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ int	is_number(char **str)
 	}
 	return (0);
 }
-
-
 
 int	check_identifier_format(char **identifier)
 {

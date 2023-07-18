@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 17:45:53 by ael-bako          #+#    #+#             */
-/*   Updated: 2023/06/21 17:51:56 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/18 11:56:44 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ char	*ft_strjoin(char *s1, char *s2)
 		i++;
 	}
 	s3[len_s1 + len_s2] = '\0';
+	free(s1);
 	return (s3);
 }
