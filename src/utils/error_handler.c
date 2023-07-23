@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:15:25 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/23 10:17:27 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/23 10:46:28 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,3 +49,5 @@ void	exit_success(char *str)
 	ft_putendl_fd(str, 1);
 	exit(EXIT_SUCCESS);
 }
+
+
