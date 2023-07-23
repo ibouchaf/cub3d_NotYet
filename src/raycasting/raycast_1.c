@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 21:46:42 by ael-bako          #+#    #+#             */
-/*   Updated: 2023/07/17 09:57:52 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/23 08:40:11 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ unsigned int	get_pixel_from_image(t_img *img, int x, int y)
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
+
 	if (x < 0 || y < 0 || y >= WINDOW_HEIGHT
 		|| x >= WINDOW_WIDTH)
 		return ;
@@ -54,4 +55,9 @@ void	move_player(t_cub *cub)
 		cub->player->x += xstep / 5;
 	if (!map_has_wall_at(cub->player->x, cub->player->y + ystep, cub))
 		cub->player->y += ystep / 5;
+}
+
+float	distance_between_points(float x1, float y1, float x2, float y2)
+{
+	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
 }

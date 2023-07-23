@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:08:30 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/18 13:21:04 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/23 08:38:34 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,21 +77,6 @@ float	get_ang(t_mx *mx)
 	return (0);
 }
 
-int rgb_to_decimal(char *s) {
-	char **color = ft_split(s, ',');
-	int	red;
-	int	green;
-	int	blue;
-	int decimal_value;
-
-	red = ft_atoi(color[0]);
-	green = ft_atoi(color[1]);
-	blue = ft_atoi(color[2]);
-	decimal_value = (red << 16) + (green << 8) + blue;
-	free_tab(color);
-	return decimal_value;
-}
-
 int	main(int ac, char **av)
 {
 	t_cub	*cub;
@@ -100,6 +85,7 @@ int	main(int ac, char **av)
 		exit_success("Usage: ./cub3D <map.cub>");
 	cub = (t_cub *)malloc(sizeof(t_cub));
 	cub->mx = malloc(sizeof(t_mx));
+	check_extension(ac, av[1]);
 	parsing_map(cub->mx, av[1]);
 	cub->mx->color1 = rgb_to_decimal(cub->mx->F);
 	cub->mx->color2 = rgb_to_decimal(cub->mx->f);
@@ -117,5 +103,4 @@ int	main(int ac, char **av)
 	mlx_hook(cub->data->win, 17, 0, distroy_event, cub);
 	mlx_loop_hook(cub->data->mlx, setup, cub);
 	mlx_loop(cub->data->mlx);
-	// system("leaks cub3D");
 }
