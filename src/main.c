@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:08:30 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/23 09:05:04 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/23 10:16:17 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ int	main(int ac, char **av)
 	cub->mx = malloc(sizeof(t_mx));
 	check_extension(ac, av[1]);
 	parsing_map(cub->mx, av[1]);
-	cub->mx->color1 = rgb_to_decimal(cub->mx->F);
-	cub->mx->color2 = rgb_to_decimal(cub->mx->f);
+	cub->mx->color1 = rgb_to_decimal(cub->mx->f);
+	cub->mx->color2 = rgb_to_decimal(cub->mx->c);
 	initialize(cub, -1);
 	cub->player->x = (cub->mx->y * TILE_SIZE) + 32;
 	cub->player->y = (cub->mx->x * TILE_SIZE) + 32;

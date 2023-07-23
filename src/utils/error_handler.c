@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handler.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 15:15:25 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/23 09:05:04 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/23 10:17:27 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@ void	exit_str(char *str)
 	ft_putstr_fd("cub3D: ", 2);
 	ft_putendl_fd(str, 2);
 	exit(EXIT_FAILURE);
+}
+
+int	is_facing(int facing)
+{
+	if (facing)
+		return (-1);
+	return (0);
 }
 
 void	exit_error(char *str, char *err)

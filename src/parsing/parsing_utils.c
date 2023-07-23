@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 08:26:53 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/23 09:05:04 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/23 10:16:17 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ void	check_colors(t_mx *mlx)
 	char	**color1;
 	char	**color2;
 
-	if (ft_comma(mlx->F) != 2 || ft_comma(mlx->f) != 2)
+	if (ft_comma(mlx->f) != 2 || ft_comma(mlx->c) != 2)
 		ft_putstr("Errors In Colors\n");
-	color1 = ft_split(mlx->F, ',');
-	color2 = ft_split(mlx->f, ',');
+	color1 = ft_split(mlx->f, ',');
+	color2 = ft_split(mlx->c, ',');
 	if (is_number(color1) == 1 || is_number(color2) == 1)
 		ft_putstr("Errors In Colors\n");
 	free_tab(color1);

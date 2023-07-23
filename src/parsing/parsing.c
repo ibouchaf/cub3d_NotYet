@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 08:27:39 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/23 09:09:01 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/23 10:16:17 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int	check_identifier(t_mx *mlx, int i)
 		return (mlx->ea = ft_strtrim((
 					ft_strchr(mlx->map[i], 'E') + 2), " \n\t"), 1);
 	else if (ft_strncmp(mlx->map[i], "F ", 2) == 0)
-		return ((mlx->F = ft_strchr(mlx->map[i], 'F') + 1), 1);
+		return ((mlx->f = ft_strchr(mlx->map[i], 'F') + 1), 1);
 	else if (ft_strncmp(mlx->map[i], "C ", 2) == 0)
-		return ((mlx->f = ft_strchr(mlx->map[i], 'C') + 1), 1);
+		return ((mlx->c = ft_strchr(mlx->map[i], 'C') + 1), 1);
 	return (0);
 }
 
@@ -53,8 +53,8 @@ void	init(t_mx *mlx)
 	mlx->so = NULL;
 	mlx->we = NULL;
 	mlx->ea = NULL;
-	mlx->F = NULL;
 	mlx->f = NULL;
+	mlx->c = NULL;
 	mlx->height = 0;
 	mlx->width = 0;
 	mlx->count = 0;

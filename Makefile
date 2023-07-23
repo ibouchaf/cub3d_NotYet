@@ -8,19 +8,8 @@ SRCS	=	src/main.c src/parsing/parsing.c src/parsing/check_map.c src/parsing/chec
 			 src/raycasting/raycast_1.c src/raycasting/raycast_2.c src/raycasting/raycast_utils.c\
 			 src/raycasting/raycast.c src/raycasting/key_hook.c $(LIBFT)
 
-define HeaDER_M
-   ______      __   _____ ____
-  / ____/_  __/ /_ |__  // __ \\
- / /   / / / / __ \\ /_ </ / / /
-/ /___/ /_/ / /_/ /__/ / /_/ /
-\\____/\\__,_/_.___/____/_____/
-endef
-export HeaDER_M
 
-all: header_m $(NAME)
-
-header_m:
-	@echo "\033[0;33m$$HeaDER_M\033[0m\n"
+all: $(NAME)
 
 $(LIBFT):
 	@echo "\033[0;36m</ Compiling libft >\033[0m"
@@ -41,4 +30,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re header_m
+.PHONY: all clean fclean re

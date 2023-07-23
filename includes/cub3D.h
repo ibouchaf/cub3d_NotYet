@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:43:27 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/23 09:05:34 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/23 10:11:00 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@
 
 # define WINDOW_WIDTH 1280
 # define WINDOW_HEIGHT 820
-
-# define FOV_ANGLE (60 * (PI / 180))
+// 60 * (PI / 180)
+# define FOV_ANGLE 1.047
 # define MINIMAP_SCALE 0.25
 # define WALL_STRIP_WIDTH 1
 # define NUM_RAYS WINDOW_WIDTH
@@ -117,7 +117,7 @@ typedef struct s_mx
 	char	*we;
 	char	*ea;
 	float	p_dir;
-	char	*F;
+	char	*c;
 	char	*f;
 	int		color1;
 	int		color2;
@@ -164,6 +164,7 @@ void			check_colors(t_mx *mlx);
 int				check_identifier_extension(t_mx *mlx);
 int				check_identifier_format(char **identifier);
 void			check_walls(t_mx *mlx);
+int				is_facing(int facing);
 void			clear_sceen(t_cub *cub);
 int				set_defeult(int keycode, t_cub *cub);
 int				key_hook(int keycode, t_cub *cub);

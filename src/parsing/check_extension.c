@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_extension.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 08:45:56 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/23 09:05:04 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/23 10:16:17 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,6 @@ void	if_edentifier_is_null(t_mx *mlx)
 {
 	if (mlx->no == NULL || mlx->so == NULL
 		|| mlx->we == NULL || mlx->ea == NULL
-		|| mlx->F == NULL || mlx->f == NULL)
+		|| mlx->f == NULL || mlx->c == NULL)
 		ft_putstr("Errors In Map \n");
 }

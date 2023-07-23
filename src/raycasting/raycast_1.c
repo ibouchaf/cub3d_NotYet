@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 21:46:42 by ael-bako          #+#    #+#             */
-/*   Updated: 2023/07/23 09:05:04 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/23 09:51:44 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,21 @@ void	move_player(t_cub *cub)
 float	distance_between_points(float x1, float y1, float x2, float y2)
 {
 	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
+}
+
+void	calculate_vertical_intersection(float rayAngle, t_cub *cub)
+{
+	cub->xintercept = floor(cub->player->x / TILE_SIZE) * TILE_SIZE;
+	if (cub->is_ray_facing_right)
+		cub->xintercept += TILE_SIZE;
+	cub->yintercept = cub->player->y
+		+ (cub->xintercept - cub->player->x) * tan(rayAngle);
+	cub->xstep = TILE_SIZE;
+	if (cub->is_ray_facing_left)
+		cub->xstep *= -1;
+	cub->ystep = TILE_SIZE * tan(rayAngle);
+	if (cub->is_ray_facing_up && (cub->ystep > 0))
+		cub->ystep *= -1;
+	if (cub->is_ray_facing_down && (cub->ystep < 0))
+		cub->ystep *= -1;
 }
