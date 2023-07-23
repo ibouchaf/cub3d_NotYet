@@ -6,7 +6,7 @@
 /*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:08:30 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/23 08:38:34 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/23 09:05:04 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ void	initialize(t_cub *cub, int i)
 	cub->img->img = mlx_new_image(cub->data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	cub->img->addr = mlx_get_data_addr(cub->img->img, &cub->img->bits_per_pixel,
 			&cub->img->line_length, &cub->img->endian);
-	cub->sprit->no = new_sprite(cub->data->mlx, cub->mx->NO);
-	cub->sprit->so = new_sprite(cub->data->mlx, cub->mx->SO);
-	cub->sprit->we = new_sprite(cub->data->mlx, cub->mx->WE);
-	cub->sprit->ea = new_sprite(cub->data->mlx, cub->mx->EA);
+	cub->sprit->no = new_sprite(cub->data->mlx, cub->mx->no);
+	cub->sprit->so = new_sprite(cub->data->mlx, cub->mx->so);
+	cub->sprit->we = new_sprite(cub->data->mlx, cub->mx->we);
+	cub->sprit->ea = new_sprite(cub->data->mlx, cub->mx->ea);
 }
 
 float	get_ang(t_mx *mx)

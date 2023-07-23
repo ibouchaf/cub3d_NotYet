@@ -6,7 +6,7 @@
 /*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 10:31:45 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/23 08:44:10 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/23 09:18:39 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,16 @@ void	check_the_map(t_mx *mlx, int i, int len, int j)
 		{
 			check_the_player(mlx, &len, i, j);
 			if (!ft_strchr("NWES10 ", mlx->map2[i][j]))
-				ft_putstr("kayna chi haja mn ghir player\n");
+				ft_putstr("Errors in map \n");
 			if (mlx->map2[i][j] == '0' || mlx->map2[i][j] == 'N')
 			{
 				if (j > (int)ft_strlen(mlx->map2[i + 1]) || i == 0
 					|| j == 0 || j > (int)ft_strlen(mlx->map2[i - 1]))
-					ft_putstr("Player can't go outside");
+					{
+						printf("i = %d\n j = %d\n", i, j);
+						printf("%s\n", mlx->map2[i]);
+						ft_putstr("Player can't go outside");
+					}
 				if (mlx->map2[i][j - 1] == ' ' || mlx->map2[i][j - 1] == '\0'
 					|| mlx->map2[i][j + 1] == ' ' || mlx->map2[i][j + 1] == '\0'
 					|| mlx->map2[i - 1][j] == ' ' || mlx->map2[i - 1][j] == '\0'

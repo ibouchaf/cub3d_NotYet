@@ -6,7 +6,7 @@
 /*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 08:45:56 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/23 08:44:26 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/23 09:05:04 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ int	rgb_to_decimal(char *s)
 
 void	if_edentifier_is_null(t_mx *mlx)
 {
-	if (mlx->NO == NULL || mlx->SO == NULL
-		|| mlx->WE == NULL || mlx->EA == NULL
+	if (mlx->no == NULL || mlx->so == NULL
+		|| mlx->we == NULL || mlx->ea == NULL
 		|| mlx->F == NULL || mlx->f == NULL)
 		ft_putstr("Errors In Map \n");
 }

@@ -6,7 +6,7 @@
 /*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:43:27 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/23 09:02:51 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/23 09:05:34 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,10 +112,10 @@ typedef struct s_mx
 	int		width;
 	int		count;
 	int		print;
-	char	*NO;
-	char	*SO;
-	char	*WE;
-	char	*EA;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
 	float	p_dir;
 	char	*F;
 	char	*f;
@@ -143,10 +143,10 @@ typedef struct s_cub
 	int			is_ray_facing_left;
 	float		horzwallhit_x;
 	float		horzwallhit_y;
-	int			horzWallContent;
+	int			horz_wall_content;
 	float		vertwallhit_x;
 	float		vertwallhit_y;
-	int			vertWallContent;
+	int			vert_wall_content;
 	float		xintercept;
 	float		yintercept;
 	float		xstep;

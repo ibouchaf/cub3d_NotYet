@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 08:27:39 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/18 13:48:58 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/23 09:09:01 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,16 @@
 int	check_identifier(t_mx *mlx, int i)
 {
 	if (ft_strncmp(mlx->map[i], "NO ", 3) == 0)
-		return (mlx->NO = ft_strtrim((
+		return (mlx->no = ft_strtrim((
 					ft_strchr(mlx->map[i], 'N') + 2), " \n\t"), 1);
 	else if (ft_strncmp(mlx->map[i], "SO ", 3) == 0)
-		return (mlx->SO = ft_strtrim((
+		return (mlx->so = ft_strtrim((
 					ft_strchr(mlx->map[i], 'S') + 2), " \n\t"), 1);
 	else if (ft_strncmp(mlx->map[i], "WE ", 3) == 0)
-		return (mlx->WE = ft_strtrim((
+		return (mlx->we = ft_strtrim((
 					ft_strchr(mlx->map[i], 'W') + 2), " \n\t"), 1);
 	else if (ft_strncmp(mlx->map[i], "EA ", 3) == 0)
-		return (mlx->EA = ft_strtrim((
+		return (mlx->ea = ft_strtrim((
 					ft_strchr(mlx->map[i], 'E') + 2), " \n\t"), 1);
 	else if (ft_strncmp(mlx->map[i], "F ", 2) == 0)
 		return ((mlx->F = ft_strchr(mlx->map[i], 'F') + 1), 1);
@@ -49,10 +49,10 @@ void	count_height(t_mx **mlx, int fd)
 void	init(t_mx *mlx)
 {
 	mlx->map2 = NULL;
-	mlx->NO = NULL;
-	mlx->SO = NULL;
-	mlx->WE = NULL;
-	mlx->EA = NULL;
+	mlx->no = NULL;
+	mlx->so = NULL;
+	mlx->we = NULL;
+	mlx->ea = NULL;
 	mlx->F = NULL;
 	mlx->f = NULL;
 	mlx->height = 0;
@@ -92,10 +92,10 @@ void	parsing_map(t_mx *mlx, char *av)
 
 int	check_identifier_extension(t_mx *mlx)
 {
-	if (ft_strncmp(ft_strrchr(mlx->NO, '.'), ".xpm", 4) != 0
-		|| ft_strncmp(ft_strrchr(mlx->SO, '.'), ".xpm", 4) != 0
-		|| ft_strncmp(ft_strrchr(mlx->WE, '.'), ".xpm", 4) != 0
-		|| ft_strncmp(ft_strrchr(mlx->EA, '.'), ".xpm", 4) != 0)
+	if (ft_strncmp(ft_strrchr(mlx->no, '.'), ".xpm", 4) != 0
+		|| ft_strncmp(ft_strrchr(mlx->so, '.'), ".xpm", 4) != 0
+		|| ft_strncmp(ft_strrchr(mlx->we, '.'), ".xpm", 4) != 0
+		|| ft_strncmp(ft_strrchr(mlx->ea, '.'), ".xpm", 4) != 0)
 	{
 		return (0);
 	}

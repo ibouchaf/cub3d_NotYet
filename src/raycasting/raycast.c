@@ -6,7 +6,7 @@
 /*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 12:49:48 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/23 09:02:51 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/23 09:05:34 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	assign_hor_ver_ray(t_ray **rays, int stripId,
 		rays[stripId]->distance = distance;
 		rays[stripId]->wallhit_x = cub->vertwallhit_x;
 		rays[stripId]->wallhit_y = cub->vertwallhit_y;
-		rays[stripId]->wall_hit_content = cub->vertWallContent;
+		rays[stripId]->wall_hit_content = cub->vert_wall_content;
 		rays[stripId]->was_hit_vertical = TRUE;
 	}
 	else
@@ -29,7 +29,7 @@ void	assign_hor_ver_ray(t_ray **rays, int stripId,
 		rays[stripId]->distance = distance;
 		rays[stripId]->wallhit_x = cub->horzwallhit_x;
 		rays[stripId]->wallhit_y = cub->horzwallhit_y;
-		rays[stripId]->wall_hit_content = cub->horzWallContent;
+		rays[stripId]->wall_hit_content = cub->horz_wall_content;
 		rays[stripId]->was_hit_vertical = FALSE;
 	}
 }

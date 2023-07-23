@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:41:06 by ael-bako          #+#    #+#             */
-/*   Updated: 2023/01/06 15:13:31 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/23 09:05:04 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 ** LIBRARY: <string.h>
-** SYNOPSIS: concatenate strings (s2 into s1)
+** SYnoPSIS: concatenate strings (s2 into s1)
 **
 ** DESCRIPTION:
 ** 		The strcat() and strncat() functions append a copy of the null-

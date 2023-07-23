@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 14:43:27 by ael-bako          #+#    #+#             */
-/*   Updated: 2023/01/06 15:55:53 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/23 09:05:04 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 ** LIBRARY: N/A
-** SYNOPSIS: find length of two dimensional array
+** SYnoPSIS: find length of two dimensional array
 **
 ** DESCRIPTION:
 ** 		The strlen_2() function computes the length of the two dimensional

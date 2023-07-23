@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 23:00:41 by ael-bako          #+#    #+#             */
-/*   Updated: 2023/07/16 17:41:54 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/23 09:05:04 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ int main() {
 // int main() {
 //     unsigned int inputColor = 10220148;
 //     unsigned int hexColor = intToHexColor(inputColor);
-//     printf("0x%06X\n", hexColor); // Output: 0x29E3EA
+//     printf("0x%06X\n", hexColor); // Output: 0x29E3ea
 
 //     return 0;
 // }

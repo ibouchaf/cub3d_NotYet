@@ -6,7 +6,7 @@
 /*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 21:49:09 by ael-bako          #+#    #+#             */
-/*   Updated: 2023/07/23 09:01:14 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/23 09:05:22 by ibouchaf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ float	find_horizontal_wall_hit(t_ray **rays, int stripId, t_cub *cub)
 	found_horz_wall_hit = FALSE;
 	cub->horzwallhit_x = 0;
 	cub->horzwallhit_y = 0;
-	cub->horzWallContent = 0;
+	cub->horz_wall_content = 0;
 	while ((cub->xintercept) >= 0
 		&& (cub->xintercept) <= (cub->mx->width * TILE_SIZE)
 		&& (cub->yintercept) >= 0

@@ -18,7 +18,7 @@
 </p>
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/a7ea133692384ce898799f497288e766)](https://app.codacy.com/gh/Aelbakouri/libft?utm_source=github.com&utm_medium=referral&utm_content=Aelbakouri/libft&utm_campaign=Badge_Grade_Settings)
-![Norminette](https://github.com/hassansaadfr/so_long/workflows/norminette3/badge.svg)
+![norminette](https://github.com/hassansaadfr/so_long/workflows/norminette3/badge.svg)
 
 
 
