@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 12:49:48 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/23 09:05:34 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:50:59 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,11 @@ void	cast_all_rays(t_cub *cub)
 
 void	rect(t_cub *cub, int x, int y, int height)
 {
-	int				i[2];
+	int				i;
 	int				tex[2];
 	float			scale[2];
 	unsigned int	color;
 
-	i[0] = -1;
 	cub->texture = get_dir(cub, x);
 	scale[0] = cub->texture->width / TILE_SIZE;
 	tex[0] = cub->ray[x]->wallhit_x;
@@ -86,15 +85,12 @@ void	rect(t_cub *cub, int x, int y, int height)
 		tex[0] = cub->ray[x]->wallhit_y;
 	tex[0] = fmod(((float)tex[0] * scale[0]), cub->texture->width);
 	scale[1] = ((double)cub->texture->height / height);
-	while (++i[0] < 1)
+	i = -1;
+	while (++i < height)
 	{
-		i[1] = -1;
-		while (++i[1] < height)
-		{
-			tex[1] = (float) i[1] * scale[1];
-			my_mlx_pixel_put(cub->img, x + i[0], y + i[1],
-				get_pixel_from_image(cub->texture, tex[0], tex[1]));
-		}
+		tex[1] = (float) i * scale[1];
+		my_mlx_pixel_put(cub->img, x, y + i,
+			get_pixel_from_image(cub->texture, tex[0], tex[1]));
 	}
 }
 
