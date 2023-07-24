@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 08:26:53 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/23 10:16:17 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/24 11:42:02 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	is_range(char **str)
 {
+	if (ft_strlen_2(str) != 3)
+		return (1);
 	if ((ft_atoi(str[0]) < 0 || ft_atoi(str[0]) > 255)
 		|| (ft_atoi(str[1]) < 0 || ft_atoi(str[1]) > 255)
 		|| (ft_atoi(str[2]) < 0 || ft_atoi(str[2]) > 255))
@@ -29,18 +31,15 @@ int	is_number(char **str)
 
 	i = 0;
 	j = 0;
-	if (is_range(str))
-		return (1);
 	while (str[i])
 	{
-		tmp = ft_strtrim(str[i], " \t");
-		j = 0;
-		while (tmp[j] && tmp[j] != '\n')
-		{
+		tmp = ft_strtrim(str[i], " \t\n");
+		if (ft_atoi(tmp) < 0 || ft_atoi(tmp) > 255 || !ft_isdigit(tmp[0]))
+			return (1);
+		j = -1;
+		while (tmp[++j])
 			if (!ft_isdigit(tmp[j]))
 				return (1);
-			j++;
-		}
 		free(tmp);
 		i++;
 	}
@@ -90,7 +89,7 @@ void	check_colors(t_mx *mlx)
 		ft_putstr("Errors In Colors\n");
 	color1 = ft_split(mlx->f, ',');
 	color2 = ft_split(mlx->c, ',');
-	if (is_number(color1) == 1 || is_number(color2) == 1)
+	if (is_number(color2) == 1 || is_number(color1) == 1)
 		ft_putstr("Errors In Colors\n");
 	free_tab(color1);
 	free_tab(color2);
