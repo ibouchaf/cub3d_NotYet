@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 08:26:53 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/24 11:42:02 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/24 20:05:35 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ int	is_number(char **str)
 
 	i = 0;
 	j = 0;
+	if (ft_strlen_2(str) != 3)
+		return (1);
 	while (str[i])
 	{
 		tmp = ft_strtrim(str[i], " \t\n");
-		if (ft_atoi(tmp) < 0 || ft_atoi(tmp) > 255 || !ft_isdigit(tmp[0]))
+		if (!tmp || ft_atoi(tmp) < 0 || ft_atoi(tmp) > 255 || !ft_isdigit(tmp[0]))
 			return (1);
 		j = -1;
 		while (tmp[++j])
