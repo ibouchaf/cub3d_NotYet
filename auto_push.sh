@@ -11,6 +11,5 @@ while true; do
     git commit -m "$commit_message"
     git push
 
-    echo "Auto-push completed. Sleeping for 50 seconds..."
-    sleep 50
+    echo "Auto-push completed..."
 done
