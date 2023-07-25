@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:43:27 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/23 10:11:00 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/25 14:49:41 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,19 +153,12 @@ typedef struct s_cub
 	float		ystep;
 }	t_cub;
 
-void			file_checker(char *str);
 void			parsing_map(t_mx *mlx, char *av);
-void			exit_str(char *str);
-void			exit_success(char *str);
-void			exit_error(char *str, char *err);
-void			exit_strerr(char *str, int err);
 void			if_edentifier_is_null(t_mx *mlx);
 void			check_colors(t_mx *mlx);
 int				check_identifier_extension(t_mx *mlx);
-int				check_identifier_format(char **identifier);
 void			check_walls(t_mx *mlx);
 int				is_facing(int facing);
-void			clear_sceen(t_cub *cub);
 int				set_defeult(int keycode, t_cub *cub);
 int				key_hook(int keycode, t_cub *cub);
 int				distroy_event(int keycode, t_cub *cub);
@@ -175,13 +168,10 @@ void			generate_projection(t_cub *cub, t_ray **rays);
 void			cast_all_rays(t_cub *cub);
 void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
 unsigned int	get_pixel_from_image(t_img *img, int x, int y);
-void			my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void			move_player(t_cub *cub);
 float			find_vertical_wall_hit(t_ray **rays, int stripId, t_cub *cub);
 void			calculate_vertical_intersection(float ray_angle, t_cub *cub);
 void			calculate_horizontal_intersection(float ray_angle, t_cub *cub);
 t_img			*get_dir(t_cub *cub, int x);
-float			distance_between_points(float x1, float y1, float x2, float y2);
 float			normalize_angle(float angle);
 void			calculate_ray_direction(float ray_angle, t_cub *cub);
 float			find_horizontal_wall_hit(t_ray **rays, int stripId, t_cub *cub);
