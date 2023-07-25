@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+         #
+#    By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/06 13:37:46 by ael-bako          #+#    #+#              #
-#    Updated: 2023/07/23 09:06:19 by ibouchaf         ###   ########.fr        #
+#    Updated: 2023/07/25 13:32:53 by ael-bako         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,23 +28,19 @@ CFLAGS	= -Wall -Wextra -Werror
 
 $(DIR_OBJS)/%.o :	$(DIR_SRCS)/%.c
 			@mkdir -p $(DIR_OBJS) $(OBJS_DIRS)
-			@printf "\033[0;33mGenerating libft objects... %-100.900s\r" $@
 			@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			@echo "\033[0;32m\n\nCompiling  libft..."
 			@ar -crs $(NAME) $(OBJS)
 			@echo "\n\033[0mDone !"
 
 clean:
-			@echo "\033[0;31m\nDeleting objects..."
 			@rm -rf $(OBJS)
 			@rm -rf $(DIR_OBJS)
 
 fclean:		clean
-			@echo "\nDeleting executable..."
 			@rm -rf $(NAME)
 
 re:			fclean all

@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:08:30 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/23 10:16:17 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/25 13:14:04 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	setup(t_cub *cub)
 {
-	clear_sceen(cub);
 	move_player(cub);
 	cast_all_rays(cub);
 	generate_projection(cub, cub->ray);
@@ -29,11 +28,11 @@ t_img	*new_sprite(void *mlx, char *path)
 
 	sprite = malloc(sizeof(t_img));
 	if (!sprite)
-		exit_strerr("malloc", errno);
+		ft_putstr_fd("Error in allocation \n", 2);
 	sprite->img = mlx_xpm_file_to_image(mlx, path,
 			&sprite->width, &sprite->height);
 	if (!sprite->img)
-		exit_strerr(path, errno);
+		ft_putstr_fd("Error in file xpm \n", 2);
 	sprite->addr = mlx_get_data_addr(sprite->img, &sprite->bits_per_pixel,
 			&sprite->line_length, &sprite->endian);
 	return (sprite);
@@ -46,17 +45,17 @@ void	initialize(t_cub *cub, int i)
 	while (i < NUM_RAYS)
 		cub->ray[i++] = malloc(sizeof(t_ray));
 	if (!cub->data || !cub->player)
-		exit_strerr("malloc", errno);
+		ft_putstr_fd("Error in allocation \n", 2);
 	cub->data->mlx = mlx_init();
 	if (!cub->data->mlx)
-		exit_error("mlx_init", "Error initializing MLX");
+		ft_putstr_fd("Error initializing mlx \n", 2);
 	cub->data->win = mlx_new_window(cub->data->mlx,
 			WINDOW_WIDTH, WINDOW_HEIGHT, "cub3D");
 	if (!cub->data->win)
-		exit_error("mlx_new_window", "Error creating MLX window");
+		ft_putstr_fd("Error creating mlx window \n", 2);
 	cub->img = malloc(sizeof(t_img));
 	if (!cub->img)
-		exit_strerr("malloc", errno);
+		ft_putstr_fd("Error in allocation \n", 2);
 	cub->img->img = mlx_new_image(cub->data->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	cub->img->addr = mlx_get_data_addr(cub->img->img, &cub->img->bits_per_pixel,
 			&cub->img->line_length, &cub->img->endian);
@@ -69,23 +68,21 @@ void	initialize(t_cub *cub, int i)
 float	get_ang(t_mx *mx)
 {
 	if (mx->p_dir == 'N')
-		return (PI / 2);
+		return (3 * M_PI_2);
 	else if (mx->p_dir == 'S')
-		return ((3 * PI) / 2);
+		return (M_PI_2);
 	else if (mx->p_dir == 'E')
-		return (PI);
-	return (0);
+		return (0);
+	return (M_PI);
 }
 
 int	main(int ac, char **av)
 {
 	t_cub	*cub;
 
-	if (ac != 2)
-		exit_success("Usage: ./cub3D <map.cub>");
+	check_extension(ac, av[1]);
 	cub = (t_cub *)malloc(sizeof(t_cub));
 	cub->mx = malloc(sizeof(t_mx));
-	check_extension(ac, av[1]);
 	parsing_map(cub->mx, av[1]);
 	cub->mx->color1 = rgb_to_decimal(cub->mx->f);
 	cub->mx->color2 = rgb_to_decimal(cub->mx->c);
@@ -96,7 +93,7 @@ int	main(int ac, char **av)
 	cub->player->turndir = 0;
 	cub->player->horizontal = 0;
 	cub->player->vertical = 0;
-	cub->player->turnspeed = 5 * (PI / 180);
+	cub->player->turnspeed = 4 * (PI / 180);
 	cub->player->walkspeed = 10;
 	mlx_hook(cub->data->win, 2, 0, key_hook, cub);
 	mlx_hook(cub->data->win, 3, 0, set_defeult, cub);

@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 12:49:48 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/24 19:50:59 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/25 14:09:25 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	cast_all_rays(t_cub *cub)
 	}
 }
 
-void	rect(t_cub *cub, int x, int y, int height)
+void	ft_rect(t_cub *cub, int x, int y, int height)
 {
 	int				i;
 	int				tex[2];
@@ -112,7 +112,7 @@ void	generate_projection(t_cub *cub, t_ray **rays)
 		dis_proj_lane = (WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2);
 		projected_wall_height = (TILE_SIZE / perp_distance) * dis_proj_lane;
 		wall_top_pixel = (WINDOW_HEIGHT / 2) - ((int)projected_wall_height / 2);
-		rect(cub, i * WALL_STRIP_WIDTH, wall_top_pixel,
+		ft_rect(cub, i * WALL_STRIP_WIDTH, wall_top_pixel,
 			(int)projected_wall_height);
 		i++;
 	}

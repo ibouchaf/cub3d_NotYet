@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 08:45:56 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/23 10:16:17 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/25 13:15:42 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	check_extension(int ac, char *str)
 
 	i = 0;
 	if (ac != 2)
-		ft_putstr("invalid argument");
+		ft_putstr_fd("Error in argument \n", 2);
 	else
 	{
 		s = ft_split(str, '.');
@@ -44,7 +44,7 @@ void	check_extension(int ac, char *str)
 		{
 			ft_free(s, &i);
 			write(2, "Error\n", 6);
-			ft_putstr("The Map Doesn't end with .cub");
+			ft_putstr_fd("The Map Doesn't end with .cub\n", 2);
 		}
 	}
 }
@@ -68,8 +68,14 @@ int	rgb_to_decimal(char *s)
 
 void	if_edentifier_is_null(t_mx *mlx)
 {
-	if (mlx->no == NULL || mlx->so == NULL
-		|| mlx->we == NULL || mlx->ea == NULL
-		|| mlx->f == NULL || mlx->c == NULL)
-		ft_putstr("Errors In Map \n");
+	if (mlx->no == NULL || mlx->so == NULL || mlx->we == NULL
+		|| mlx->ea == NULL || mlx->f == NULL || mlx->c == NULL)
+		ft_putstr_fd("Errors In Map \n", 2);
+}
+
+int	is_facing(int facing)
+{
+	if (facing)
+		return (-1);
+	return (0);
 }

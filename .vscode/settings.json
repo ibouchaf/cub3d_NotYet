@@ -3,5 +3,6 @@
 		"random": "c",
 		"__tree": "c",
 		"map": "c"
-	}
+	},
+	"C_Cpp.errorSquiggles": "disabled"
 }

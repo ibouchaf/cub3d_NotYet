@@ -6,11 +6,16 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 21:49:09 by ael-bako          #+#    #+#             */
-/*   Updated: 2023/07/23 10:06:42 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/25 14:06:53 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+float	distance_between_points(float x1, float y1, float x2, float y2)
+{
+	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
+}
 
 int	norm_find_ver(t_cub *cub, int found_vert_wall_hit)
 {
@@ -93,21 +98,4 @@ float	find_horizontal_wall_hit(t_ray **rays, int stripId, t_cub *cub)
 	else
 		hor_hit_distance = INT_MAX;
 	return (hor_hit_distance);
-}
-
-void	calculate_horizontal_intersection(float rayAngle, t_cub *cub)
-{
-	cub->yintercept = floor(cub->player->y / TILE_SIZE) * TILE_SIZE;
-	if (cub->is_ray_facing_down)
-		cub->yintercept += TILE_SIZE;
-	cub->xintercept = cub->player->x
-		+ (cub->yintercept - cub->player->y) / tan(rayAngle);
-	cub->ystep = TILE_SIZE;
-	if (cub->is_ray_facing_up)
-		cub->ystep *= -1;
-	cub->xstep = TILE_SIZE / tan(rayAngle);
-	if ((cub->is_ray_facing_left && (cub->xstep > 0)))
-		cub->xstep *= -1;
-	if ((cub->is_ray_facing_right && (cub->xstep < 0)))
-		cub->xstep *= -1;
 }

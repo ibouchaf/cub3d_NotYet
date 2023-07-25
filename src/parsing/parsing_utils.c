@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 08:26:53 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/24 20:05:35 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/25 13:15:54 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	is_number(char **str)
 	while (str[i])
 	{
 		tmp = ft_strtrim(str[i], " \t\n");
-		if (!tmp || ft_atoi(tmp) < 0 || ft_atoi(tmp) > 255 || !ft_isdigit(tmp[0]))
+		if (!tmp || ft_atoi(tmp) < 0 || ft_atoi(tmp) > 255
+			|| !ft_isdigit(tmp[0]))
 			return (1);
 		j = -1;
 		while (tmp[++j])
@@ -88,11 +89,11 @@ void	check_colors(t_mx *mlx)
 	char	**color2;
 
 	if (ft_comma(mlx->f) != 2 || ft_comma(mlx->c) != 2)
-		ft_putstr("Errors In Colors\n");
+		ft_putstr_fd("Errors In Colors\n", 2);
 	color1 = ft_split(mlx->f, ',');
 	color2 = ft_split(mlx->c, ',');
 	if (is_number(color2) == 1 || is_number(color1) == 1)
-		ft_putstr("Errors In Colors\n");
+		ft_putstr_fd("Errors In Colors\n", 2);
 	free_tab(color1);
 	free_tab(color2);
 }

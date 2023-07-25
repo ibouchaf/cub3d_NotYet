@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 08:27:39 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/23 11:12:34 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/25 12:58:50 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	parsing_map(t_mx *mlx, char *av)
 	init(mlx);
 	i[0] = open(av, O_RDONLY);
 	if (i[0] < 0)
-		ft_putstr("no such file or directory");
+		ft_putstr_fd("no such file or directory \n", 2);
 	count_height(&mlx, i[0]);
 	mlx->map = malloc(sizeof(char *) * (mlx->height + 1));
 	i[0] = open(av, O_RDONLY);
@@ -82,11 +82,11 @@ void	parsing_map(t_mx *mlx, char *av)
 		if (check_identifier(mlx, i[1]))
 			mlx->count++;
 	if (mlx->count != 6)
-		ft_putstr("Errors In Edentifier \n");
+		ft_putstr_fd("Errors In Edentifier \n", 2);
 	if_edentifier_is_null(mlx);
 	check_colors(mlx);
 	if (!check_identifier_extension(mlx))
-		ft_putstr("Identifiers do not end with .xpm\n");
+		ft_putstr_fd("Identifiers do not end with .xpm\n", 2);
 	check_walls(mlx);
 }
 

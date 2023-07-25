@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ibouchaf <ibouchaf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 12:53:43 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/23 09:05:04 by ibouchaf         ###   ########.fr       */
+/*   Updated: 2023/07/25 13:13:54 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,22 +68,4 @@ int	set_defeult(int keycode, t_cub *cub)
 	else if (keycode == LEFT_KEY)
 		cub->player->turndir = 0;
 	return (0);
-}
-
-void	clear_sceen(t_cub *cub)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < WINDOW_WIDTH)
-	{
-		j = 0;
-		while (j < WINDOW_HEIGHT)
-		{
-			my_mlx_pixel_put(cub->img, i, j, 0);
-			j++;
-		}
-		i++;
-	}
 }

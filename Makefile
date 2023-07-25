@@ -1,24 +1,20 @@
 NAME	=	cub3D
 RM		=	rm -f
 CC		=	gcc -Iincludes -I libs/libft/includes #-g -fsanitize=address
-MLXFLG	=	-lmlx -framework OpenGL -framework AppKit
+MLXFLG	=	-Ofast -lmlx -framework OpenGL -framework AppKit
 LIBFT	=	libft/libft.a
 SRCS	=	src/main.c src/parsing/parsing.c src/parsing/check_map.c src/parsing/check_extension.c\
-			 src/parsing/parsing_utils.c src/utils/error_handler.c \
-			 src/raycasting/raycast_1.c src/raycasting/raycast_2.c src/raycasting/raycast_utils.c\
-			 src/raycasting/raycast.c src/raycasting/key_hook.c $(LIBFT)
+			 src/parsing/parsing_utils.c src/raycasting/raycast_1.c src/raycasting/raycast_2.c \
+			 src/raycasting/raycast_utils.c src/raycasting/raycast.c src/raycasting/key_hook.c $(LIBFT)
 
 
 all: $(NAME)
 
 $(LIBFT):
-	@echo "\033[0;36m</ Compiling libft >\033[0m"
 	@make -C libft
 
 $(NAME): $(SRCS) $(LIBFT)
-	@echo "\033[0;36m</ Compiling Cub3D >\033[0m"
 	@$(CC) $(MLXFLG) $(SRCS) -o $(NAME)
-	@echo "\033[1;32mCub3D has been compiled!\033[0m\n"
 
 clean:
 	@make clean -C libft
@@ -26,7 +22,6 @@ clean:
 fclean: clean
 	@$(RM) $(NAME)
 	@make fclean -C libft
-	@echo "\n\033[0;31m</ EVERYTHING HAS BEEN DELETED! >\033[0m\n"
 
 re: fclean all
 
