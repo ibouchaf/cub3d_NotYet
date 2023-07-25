@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:43:27 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/17 08:23:29 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/23 09:33:23 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,11 @@ typedef struct s_mx
 	char *SO;
 	char *WE;
 	char *EA;
-	// int h;
 	float p_dir;
-	char *F;
+	char *c;
 	char *f;
-	int	color1;
-	int	color2;
+	int color1;
+	int color2;
 	int i;
 	int j;
 	float x;
@@ -187,15 +186,15 @@ void cast_all_rays(t_cub *cub);
 void my_mlx_pixel_put(t_img *img, int x, int y, int color);
 // void init_textures(t_cub *cub);
 
-unsigned int	get_pixel_from_image(t_img *img, int x, int y);
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
-void	move_player(t_cub *cub);
-float	find_vertical_wall_hit(t_ray **rays, int stripId, t_cub *cub);
-void	calculate_vertical_intersection(float rayAngle, t_cub *cub);
-void	calculate_horizontal_intersection(float rayAngle, t_cub *cub);
-t_img	*get_dir(t_cub *cub, int x);
-float	distance_between_points(float x1, float y1, float x2, float y2);
-float	normalize_angle(float angle);
-void	calculate_ray_direction(float rayAngle, t_cub *cub);
-float	find_horizontal_wall_hit(t_ray **rays, int stripId, t_cub *cub);
+unsigned int get_pixel_from_image(t_img *img, int x, int y);
+void my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void move_player(t_cub *cub);
+float find_vertical_wall_hit(t_ray **rays, int stripId, t_cub *cub);
+void calculate_vertical_intersection(float rayAngle, t_cub *cub);
+void calculate_horizontal_intersection(float rayAngle, t_cub *cub);
+t_img *get_dir(t_cub *cub, int x);
+float distance_between_points(float x1, float y1, float x2, float y2);
+float normalize_angle(float angle);
+void calculate_ray_direction(float rayAngle, t_cub *cub);
+float find_horizontal_wall_hit(t_ray **rays, int stripId, t_cub *cub);
 #endif

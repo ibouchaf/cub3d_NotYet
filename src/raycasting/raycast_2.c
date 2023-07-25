@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 21:49:09 by ael-bako          #+#    #+#             */
-/*   Updated: 2023/07/17 08:24:16 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/23 09:42:18 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,11 @@ int	is_facing(int facing)
 		return (-1);
 	return (0);
 }
-
-float	find_vertical_wall_hit(t_ray **rays, int stripId, t_cub *cub)
+int	norm_find_ver (t_cub *cub, int found_vert_wall_hit)
 {
-	int		found_vert_wall_hit;
 	float	x_to_check;
 	float	y_to_check;
-	float	vert_hit_distance;
 
-	found_vert_wall_hit = FALSE;
 	while ((cub->xintercept) >= 0
 		&& (cub->xintercept) <= (cub->mx->width * TILE_SIZE)
 		&& (cub->yintercept) >= 0
@@ -47,7 +43,14 @@ float	find_vertical_wall_hit(t_ray **rays, int stripId, t_cub *cub)
 			(cub->yintercept) += cub->ystep;
 		}
 	}
-	if (found_vert_wall_hit)
+	return (found_vert_wall_hit);
+}
+
+float	find_vertical_wall_hit(t_ray **rays, int stripId, t_cub *cub)
+{
+	float	vert_hit_distance;
+
+	if (norm_find_ver(cub, 0))
 		vert_hit_distance = distance_between_points(cub->player->x,
 				cub->player->y, cub->vertWallHitX, cub->vertWallHitY);
 	else
@@ -72,17 +75,11 @@ void	calculate_vertical_intersection(float rayAngle, t_cub *cub)
 		cub->ystep *= -1;
 }
 
-float	find_horizontal_wall_hit(t_ray **rays, int stripId, t_cub *cub)
+int	norm_find_hor(t_cub *cub, int found_horz_wall_hit)
 {
-	int		found_horz_wall_hit;
 	float	x_to_check;
 	float	y_to_check;
-	float	hor_hit_distance;
 
-	found_horz_wall_hit = FALSE;
-	cub->horzWallHitX = 0;
-	cub->horzWallHitY = 0;
-	cub->horzWallContent = 0;
 	while ((cub->xintercept) >= 0
 		&& (cub->xintercept) <= (cub->mx->width * TILE_SIZE)
 		&& (cub->yintercept) >= 0
@@ -103,7 +100,18 @@ float	find_horizontal_wall_hit(t_ray **rays, int stripId, t_cub *cub)
 			(cub->yintercept) += cub->ystep;
 		}
 	}
-	if (found_horz_wall_hit)
+	return (found_horz_wall_hit);
+}
+
+float	find_horizontal_wall_hit(t_ray **rays, int stripId, t_cub *cub)
+{
+	float	hor_hit_distance;
+
+	cub->horzWallHitX = 0;
+	cub->horzWallHitY = 0;
+	cub->horzWallContent = 0;
+
+	if (norm_find_hor(cub, 0))
 		hor_hit_distance = distance_between_points(cub->player->x,
 				cub->player->y, cub->horzWallHitX, cub->horzWallHitY);
 	else

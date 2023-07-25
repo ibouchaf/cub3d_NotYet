@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 10:08:30 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/18 13:21:04 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/23 09:32:59 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ int	main(int ac, char **av)
 	cub = (t_cub *)malloc(sizeof(t_cub));
 	cub->mx = malloc(sizeof(t_mx));
 	parsing_map(cub->mx, av[1]);
-	cub->mx->color1 = rgb_to_decimal(cub->mx->F);
-	cub->mx->color2 = rgb_to_decimal(cub->mx->f);
+	cub->mx->color1 = rgb_to_decimal(cub->mx->f);
+	cub->mx->color2 = rgb_to_decimal(cub->mx->c);
 	initialize(cub, -1);
 	cub->player->x = (cub->mx->y * TILE_SIZE) + 32;
 	cub->player->y = (cub->mx->x * TILE_SIZE) + 32;

@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 10:31:45 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/18 13:43:55 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/23 09:32:59 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	if_edentifier_is_null(t_mx *mlx)
 {
 	if (mlx->NO == NULL || mlx->SO == NULL
 		|| mlx->WE == NULL || mlx->EA == NULL
-		|| mlx->F == NULL || mlx->f == NULL)
+		|| mlx->f == NULL || mlx->c == NULL)
 		ft_putstr("Errors In Map \n");
 }
 
