@@ -1,5 +1,16 @@
 #!/bin/bash
 while true; do
-    git add . ; git commit -m "I think its the last change" ;  git push
+    echo "Enter your commit message (or type 'exit' to stop auto-pushing): "
+    read commit_message
+    if [ "$commit_message" = "exit" ]; then
+        echo "Exiting the auto-push script."
+        break
+    fi
+
+    git add .
+    git commit -m "$commit_message"
+    git push
+
+    echo "Auto-push completed. Sleeping for 50 seconds..."
     sleep 50
 done
