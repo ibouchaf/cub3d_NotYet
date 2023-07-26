@@ -6,11 +6,19 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 10:31:45 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/25 13:03:56 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/25 15:42:49 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+void	if_edentifier_is_null(t_mx *mlx)
+{
+	if (mlx->NO == NULL || mlx->SO == NULL
+		|| mlx->WE == NULL || mlx->EA == NULL
+		|| mlx->f == NULL || mlx->c == NULL)
+		ft_putstr("Errors In Map \n");
+}
 
 int	height_map2(t_mx *mlx)
 {

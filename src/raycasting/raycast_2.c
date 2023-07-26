@@ -6,7 +6,11 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 21:49:09 by ael-bako          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/07/25 14:06:53 by ael-bako         ###   ########.fr       */
+=======
+/*   Updated: 2023/07/23 09:42:18 by ael-bako         ###   ########.fr       */
+>>>>>>> f0ddab40e5fedbac4fbcfe045ecc9e8a902aebe1
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +20,12 @@ float	distance_between_points(float x1, float y1, float x2, float y2)
 {
 	return (sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1)));
 }
+<<<<<<< HEAD
 
 int	norm_find_ver(t_cub *cub, int found_vert_wall_hit)
+=======
+int	norm_find_ver (t_cub *cub, int found_vert_wall_hit)
+>>>>>>> f0ddab40e5fedbac4fbcfe045ecc9e8a902aebe1
 {
 	float	x_to_check;
 	float	y_to_check;
@@ -57,6 +65,23 @@ float	find_vertical_wall_hit(t_ray **rays, int stripId, t_cub *cub)
 	return (vert_hit_distance);
 }
 
+void	calculate_vertical_intersection(float rayAngle, t_cub *cub)
+{
+	cub->xintercept = floor(cub->player->x / TILE_SIZE) * TILE_SIZE;
+	if (cub->is_ray_facing_right)
+		cub->xintercept += TILE_SIZE;
+	cub->yintercept = cub->player->y
+		+ (cub->xintercept - cub->player->x) * tan(rayAngle);
+	cub->xstep = TILE_SIZE;
+	if (cub->is_ray_facing_left)
+		cub->xstep *= -1;
+	cub->ystep = TILE_SIZE * tan(rayAngle);
+	if (cub->is_ray_facing_up && (cub->ystep > 0))
+		cub->ystep *= -1;
+	if (cub->is_ray_facing_down && (cub->ystep < 0))
+		cub->ystep *= -1;
+}
+
 int	norm_find_hor(t_cub *cub, int found_horz_wall_hit)
 {
 	float	x_to_check;
@@ -89,9 +114,10 @@ float	find_horizontal_wall_hit(t_ray **rays, int stripId, t_cub *cub)
 {
 	float	hor_hit_distance;
 
-	cub->horzwallhit_x = 0;
-	cub->horzwallhit_y = 0;
-	cub->horz_wall_content = 0;
+	cub->horzWallHitX = 0;
+	cub->horzWallHitY = 0;
+	cub->horzWallContent = 0;
+
 	if (norm_find_hor(cub, 0))
 		hor_hit_distance = distance_between_points(cub->player->x,
 				cub->player->y, cub->horzwallhit_x, cub->horzwallhit_y);

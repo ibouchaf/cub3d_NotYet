@@ -6,7 +6,7 @@
 /*   By: ael-bako <ael-bako@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 08:27:39 by ibouchaf          #+#    #+#             */
-/*   Updated: 2023/07/25 14:46:13 by ael-bako         ###   ########.fr       */
+/*   Updated: 2023/07/25 15:43:20 by ael-bako         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ void	count_height(t_mx **mlx, int fd)
 void	init(t_mx *mlx)
 {
 	mlx->map2 = NULL;
-	mlx->no = NULL;
-	mlx->so = NULL;
-	mlx->we = NULL;
-	mlx->ea = NULL;
+	mlx->NO = NULL;
+	mlx->SO = NULL;
+	mlx->WE = NULL;
+	mlx->EA = NULL;
 	mlx->f = NULL;
 	mlx->c = NULL;
 	mlx->height = 0;
